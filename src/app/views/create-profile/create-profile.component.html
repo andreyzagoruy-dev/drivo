@@ -1,0 +1,33 @@
+<h2>Розкажи про себе</h2>
+<form class="form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <label>
+    Ім'я:
+    <input type="text" formControlName="name">
+  </label>
+  <label>
+    Email:
+    <input type="text" formControlName="email">
+  </label>
+  <label>
+    Номер телефону:
+    <input type="text" formControlName="tel">
+  </label>
+  <label>
+    Інформація про машину:
+    <input type="text" formControlName="car">
+  </label>
+  <label>
+    Адреса роботи:
+    <app-places-suggest (addLocation)="workLocation($event)"></app-places-suggest>
+  </label>
+  <label>
+    Домашня адреса:
+    <app-places-suggest (addLocation)="homeLocation($event)"></app-places-suggest>
+  </label>
+
+  <button type="submit" [disabled]="!profileForm.valid">Зберегти</button>
+</form>
+
+<p>
+  Form Value: {{ profileForm.value | json }}
+</p>

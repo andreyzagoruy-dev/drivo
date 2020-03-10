@@ -1,0 +1,4 @@
+<input type="text" [formControl]="searchQuery">
+<ul>
+  <li *ngFor = "let place of suggestedPlaces" (click)=setPlace(place)>{{place.title}}</li>
+</ul>
