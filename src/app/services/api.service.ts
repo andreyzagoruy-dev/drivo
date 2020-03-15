@@ -6,7 +6,7 @@ import { User } from '@models/user';
 
 type Request = 'GET' | 'POST' | 'PUT' | 'DETELE';
 
-const API_BASE_URL = 'https://reqres.in/api/'
+const API_BASE_URL = '//localhost:3000/api/'
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +14,6 @@ const API_BASE_URL = 'https://reqres.in/api/'
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-
-  public login(email: string, password: string): Observable<User> {
-    return this._request('POST', 'login', {email, password});
-  }
 
   public getUserById(id: number): Observable<User> {
     return this._request('GET', `users/${id}`);
