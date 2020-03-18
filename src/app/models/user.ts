@@ -4,7 +4,7 @@ export interface User {
   token?: string,
 }
 
-export interface UserSingUp {
+export interface NewUser {
   email: string,
   password: string,
 }

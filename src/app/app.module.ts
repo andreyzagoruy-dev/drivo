@@ -11,7 +11,7 @@ import { LoginComponent } from './views/login/login.component';
 import { PlacesSuggestComponent } from './components/places-suggest/places-suggest.component';
 import { CreateProfileComponent } from './views/create-profile/create-profile.component';
 import { AuthInterceptor } from '@services/auth.interceptor';
-import { SingUpComponent } from './views/sing-up/sing-up.component';
+import { SignUpComponent } from './views/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { SingUpComponent } from './views/sing-up/sing-up.component';
     LoginComponent,
     PlacesSuggestComponent,
     CreateProfileComponent,
-    SingUpComponent
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
