@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   public isLoggedIn(): boolean {
-    return this.getUserToken ? true : false;
+    return this.getUserToken() ? true : false;
   }
 
   public getUserToken(): string {
