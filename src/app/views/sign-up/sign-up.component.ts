@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, AbstractControl, FormBuilder, FormControl, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
-import { SignUpService } from '@services/sign-up.service'
-import { NewUser } from '@models/user';
+import { FormGroup, AbstractControl, FormControl, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { ApiService } from '@services/api.service';
+import { AuthService } from '@services/auth.service';
+ import { NewUser } from '@models/user';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,46 +10,51 @@ import { NewUser } from '@models/user';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-
-  user: NewUser
+  user: NewUser;
 
   constructor(
-    private signUpService: SignUpService
+    private api: ApiService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() { }
 
   private isCheckPassword(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      if(this.singUpForm && control.value !== this.singUpForm.value.password) {
-        return {required: false}
+      if(this.signUpForm && control.value !== this.signUpForm.value.password) {
+        return { required: false };
       }
       return null;
     };
   };
 
-  singUpForm = new FormGroup({
-    'email': new FormControl('des@dd', [Validators.required, Validators.email]),
-    'password': new FormControl('123456  ', [Validators.required, Validators.minLength(6)]),
-    'confirmPassword': new FormControl ('123456  ', [Validators.required, this.isCheckPassword()]),
+  signUpForm = new FormGroup({
+    'email': new FormControl('test@gmail.ua', [Validators.required, Validators.email]),
+    'password': new FormControl('123456', [Validators.required, Validators.minLength(6)]),
+    'confirmPassword': new FormControl ('123456', [Validators.required, this.isCheckPassword()]),
   });
 
-  get email() { return this.singUpForm.get('email')};
+  get email() {
+    return this.signUpForm.get('email');
+  };
 
-  get password() {return this.singUpForm.get('password')};
+  get password() {
+    return this.signUpForm.get('password');
+  };
 
-  get confirmPassword() {return this.singUpForm.get('confirmPassword')};
+  get confirmPassword() {
+    return this.signUpForm.get('confirmPassword');
+  };
 
-  onSubmit(){
-    this.add(this.singUpForm.value);
+  add (user: NewUser) {
+    this.api.addUser(user.email.trim(), user.password.trim()).subscribe((data: Record<string, any>) => {
+      if (data.user_id) {
+        this.auth.saveUser(data);
+      }
+    });
   }
 
-  add( user ){
-    const email = user.email.trim();
-    const password = user.password.trim();
-
-    const newUser = {email, password} as NewUser;
-    console.log(newUser);
-    this.signUpService.addUser(newUser)
+  onSubmit() {
+    this.add(this.signUpForm.value);
   }
 }

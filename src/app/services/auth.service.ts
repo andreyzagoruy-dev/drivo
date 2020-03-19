@@ -19,16 +19,17 @@ export class AuthService {
 
     return this.http.post(`${API_URL}/users/login`, body)
       .pipe(
-        tap(this._saveUser)
+        tap(this.saveUser)
       )
   }
 
   public logout() {
+    console.log(this._removeUser());
     this._removeUser();
   }
 
   public isLoggedIn(): boolean {
-    return this.getUserToken ? true : false;
+    return this.getUserToken() ? true : false;
   }
 
   public getUserToken(): string {
@@ -39,7 +40,7 @@ export class AuthService {
     return Number(localStorage.getItem('user_id'));
   }
 
-  private _saveUser(response): void {
+  public saveUser(response): void {
     localStorage.setItem('user_id', response.user_id);
     localStorage.setItem('token', response.token);
   }
