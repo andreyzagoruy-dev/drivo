@@ -11,6 +11,7 @@ import { LoginComponent } from './views/login/login.component';
 import { PlacesSuggestComponent } from './components/places-suggest/places-suggest.component';
 import { CreateProfileComponent } from './views/create-profile/create-profile.component';
 import { AuthInterceptor } from '@services/auth.interceptor';
+import { SignUpComponent } from './views/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AuthInterceptor } from '@services/auth.interceptor';
     MapComponent,
     LoginComponent,
     PlacesSuggestComponent,
-    CreateProfileComponent
+    CreateProfileComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

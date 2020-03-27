@@ -19,11 +19,12 @@ export class AuthService {
 
     return this.http.post(`${API_URL}/users/login`, body)
       .pipe(
-        tap(this._saveUser)
+        tap(this.saveUser)
       )
   }
 
   public logout() {
+    console.log(this._removeUser());
     this._removeUser();
   }
 
@@ -39,7 +40,7 @@ export class AuthService {
     return Number(localStorage.getItem('user_id'));
   }
 
-  private _saveUser(response): void {
+  public saveUser(response): void {
     localStorage.setItem('user_id', response.user_id);
     localStorage.setItem('token', response.token);
   }
@@ -48,5 +49,4 @@ export class AuthService {
     localStorage.removeItem('user_id');
     localStorage.removeItem('token');
   }
-
 }
