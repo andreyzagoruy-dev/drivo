@@ -57,7 +57,7 @@ export class MapComponent implements OnInit, OnChanges {
   private _renderHome(): void {
     if (!this.home) return;
 
-    const homeMarker = this._createMarker({lat: this.home.latitude, lng: this.home.longitude}, 'home');
+    const homeMarker = this._createMarker(this.home, 'home');
     homeMarker.addTo(this._map);
   }
 
