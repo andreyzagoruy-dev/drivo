@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { User } from '@models/user';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
 
-  private _userProfile: User = null;
+  private _userProfile = new BehaviorSubject(null);
 
-  constructor() { }
+  public setItem(itemName: string, value) {
+    this._checkStorageItem(itemName);
+
+    this[`_${itemName}`].next(value);
+  }
 
   public getItem(itemName: string) {
     this._checkStorageItem(itemName);
@@ -16,10 +20,10 @@ export class StorageService {
     return this[`_${itemName}`];
   }
 
-  public setItem(itemName: string, value): void {
+  public getItemValue(itemName: string) {
     this._checkStorageItem(itemName);
 
-    this[`_${itemName}`] = value;
+    return this[`_${itemName}`].value
   }
 
   private _checkStorageItem(itemName: string): void {
