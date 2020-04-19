@@ -16,9 +16,6 @@ export class AppComponent {
   }
 
   isLogin(): boolean {
-    if (localStorage.getItem('user_id') && localStorage.getItem('token')) {
-      return true;
-    }
-    return false;
+    return this.auth.isLoggedIn();
   }
 }
