@@ -24,7 +24,6 @@ export class AuthService {
   }
 
   public logout() {
-    console.log(this._removeUser());
     this._removeUser();
   }
 

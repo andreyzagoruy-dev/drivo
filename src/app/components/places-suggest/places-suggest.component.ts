@@ -9,6 +9,7 @@ import { debounceTime, filter } from 'rxjs/operators';
   styleUrls: ['./places-suggest.component.scss']
 })
 export class PlacesSuggestComponent implements OnInit {
+  public address = '';
 
   public searchQuery = new FormControl('');
 
@@ -16,8 +17,8 @@ export class PlacesSuggestComponent implements OnInit {
 
   @Output() addLocation = new EventEmitter<any>();
     setPlace(place: any) {
+      this.showAddress(place.title);
       this.addLocation.emit(place.position);
-      // console.log(this.location);
     }
 
   constructor(private placesGeocode: PlacesGeocodeService) { }
@@ -36,5 +37,17 @@ export class PlacesSuggestComponent implements OnInit {
     });
   }
 
+  showAddress(place: string): boolean {
+    if (place.length !== 0){
+      this.address = place;
+      return true;
+    }
+    return false;
+  }
+
+  cleanAddress(): void {
+    this.address = '';
+    event.preventDefault()
+  }
 
 }

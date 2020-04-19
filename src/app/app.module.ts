@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { MapComponent } from './components/map/map.component';
 import { LoginComponent } from './views/login/login.component';
 import { PlacesSuggestComponent } from './components/places-suggest/places-suggest.component';
-import { CreateProfileComponent } from './views/create-profile/create-profile.component';
+import { ProfileComponent } from './views/profile/profile.component';
 import { AuthInterceptor } from '@services/auth.interceptor';
 import { SignUpComponent } from './views/sign-up/sign-up.component';
 
@@ -19,7 +19,7 @@ import { SignUpComponent } from './views/sign-up/sign-up.component';
     MapComponent,
     LoginComponent,
     PlacesSuggestComponent,
-    CreateProfileComponent,
+    ProfileComponent,
     SignUpComponent
   ],
   imports: [

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormControl, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { ApiService } from '@services/api.service';
 import { AuthService } from '@services/auth.service';
- import { NewUser } from '@models/user';
+import { UnauthorizedUser } from '@models/user';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +10,7 @@ import { AuthService } from '@services/auth.service';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-  user: NewUser;
+  user: UnauthorizedUser;
 
   constructor(
     private api: ApiService,
@@ -46,7 +46,7 @@ export class SignUpComponent implements OnInit {
     return this.signUpForm.get('confirmPassword');
   };
 
-  add (user: NewUser) {
+  add (user: UnauthorizedUser) {
     this.api.addUser(user.email.trim(), user.password.trim()).subscribe((data: Record<string, any>) => {
       if (data.user_id) {
         this.auth.saveUser(data);

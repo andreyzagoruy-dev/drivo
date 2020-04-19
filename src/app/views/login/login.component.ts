@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@services/auth.service';
 import { ApiService } from '@services/api.service';
 import { StorageService } from '@services/storage.service';
+import { Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private api: ApiService,
     private auth: AuthService,
-    private storage: StorageService
+    private storage: StorageService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -32,10 +34,10 @@ export class LoginComponent implements OnInit {
         this.storage.setItem('userId', response.id);
         this.storage.setItem('userProfile', response);
       });
+
+    this.router.navigate(['/profile']);
   }
 
-  logout() {
-    this.auth.logout();
-  }
+
 
 }

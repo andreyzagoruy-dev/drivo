@@ -1,0 +1,21 @@
+<h2>Розкажи про себе</h2>
+<form class="form" (ngSubmit)="onSubmit()" #profileForm="ngForm">
+  <label class="form__input">
+    Ім'я:
+    <input type="text" [(ngModel)]=profile.fullname name="fullname" #fullname="ngModel" required>
+  </label>
+  <label class="form__input">
+    Адреса роботи:
+    <app-places-suggest (addLocation)="workLocation($event)"></app-places-suggest>
+  </label>
+  <label class="form__input">
+    Домашня адреса:
+    <app-places-suggest (addLocation)="homeLocation($event)"></app-places-suggest>
+  </label>
+
+  <button class="form__button" type="submit" [disabled]="!profileForm.valid">Зберегти</button>
+</form>
+
+<p>
+  Form Value: {{ profile | json }}
+</p>

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { User } from '@models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-
-  private _userProfile = new BehaviorSubject(null);
+  private _userProfile = new BehaviorSubject<User>(null);
 
   public setItem(itemName: string, value) {
     this._checkStorageItem(itemName);
