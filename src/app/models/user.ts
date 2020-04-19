@@ -4,12 +4,12 @@ interface UnauthorizedUser {
 }
 
 interface User extends UnauthorizedUser {
-  id: string;
+  id: number;
   fullname: string;
-  homeLatitude: string;
-  homeLongitude: string;
-  workLatitude: string;
-  workLongitude: string;
+  homeLatitude: number;
+  homeLongitude: number;
+  workLatitude: number;
+  workLongitude: number;
 }
 
 export { UnauthorizedUser, User }

@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiBaseUrl: '//localhost:3000/api',
+  apiMapsUrl: 'https://geocode.search.hereapi.com/v1/geocode?apiKey=',
+  apiMapsKey: 'PlBaCE42NHOrkIaoJA_XyUfT8ea0HIUaLpumgDgADrE',
 };
 
 /*

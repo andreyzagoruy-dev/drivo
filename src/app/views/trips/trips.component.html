@@ -1,0 +1,9 @@
+<div class="card" *ngFor="let trip of trips">
+    <div class="map">
+        <app-map [route]="trip.route" [markers]="trip.markers" [home]="user ? [user.homeLatitude, user.homeLongitude] : null"></app-map>
+    </div>
+    <span>Car: {{trip.car.model}}({{trip.car.license}})</span>
+    <br/>
+    <span>Seats: {{trip.seatsLeft}} of {{trip.seatsTotal}}</span>
+</div>
+<button (click)="addTrip()">Add trip</button>

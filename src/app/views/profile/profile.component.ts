@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.storage.getItem("userProfile").subscribe( user => {
       this.profile = user;
-      if(this.profile === null){
+      if(this.profile === null) {
         this.api.getUserById(Number(localStorage.getItem('user_id'))).
         subscribe((data: User) => {
             this.storage.setItem("userProfile", data)

@@ -1,6 +1,7 @@
 import { Component, OnChanges, Input, ViewChild, OnInit } from '@angular/core';
 import { Map, Marker, Polyline, tileLayer } from 'leaflet';
 import { icons } from './icons'
+import { LatLng } from '@models/map';
 
 @Component({
   selector: 'app-map',
@@ -10,9 +11,9 @@ import { icons } from './icons'
 export class MapComponent implements OnInit, OnChanges {
 
   @ViewChild('map', { static: true }) mapReference;
-  @Input() markers: [];
-  @Input() home;
-  @Input() route: [];
+  @Input() markers: LatLng[] = [];
+  @Input() home: LatLng = null;
+  @Input() route: LatLng[] = [];
 
   private _map;
 
@@ -67,7 +68,7 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   private _renderPath(): void {
-    const path = this._createPath(this.route);
+    const path = this._createPath(this.route as []);
     path.addTo(this._map);
     this._map.fitBounds(path.getBounds());
   }

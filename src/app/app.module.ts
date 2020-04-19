@@ -12,6 +12,8 @@ import { PlacesSuggestComponent } from './components/places-suggest/places-sugge
 import { ProfileComponent } from './views/profile/profile.component';
 import { AuthInterceptor } from '@services/auth.interceptor';
 import { SignUpComponent } from './views/sign-up/sign-up.component';
+import { TripsComponent } from './views/trips/trips.component';
+import { AddTripComponent } from './views/add-trip/add-trip.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,9 @@ import { SignUpComponent } from './views/sign-up/sign-up.component';
     MapComponent,
     LoginComponent,
     PlacesSuggestComponent,
+    SignUpComponent,
+    TripsComponent,
+    AddTripComponent,
     ProfileComponent,
     SignUpComponent
   ],

@@ -1,34 +1,21 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '@models/user';
+import { Storage } from '@models/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-  private _userProfile = new BehaviorSubject<User>(null);
 
-  public setItem(itemName: string, value) {
-    this._checkStorageItem(itemName);
-
-    this[`_${itemName}`].next(value);
+  private _storage: Storage = {
+    userProfile: new BehaviorSubject(null),
   }
 
-  public getItem(itemName: string) {
-    this._checkStorageItem(itemName);
-
-    return this[`_${itemName}`];
+  public setItem<T extends keyof Storage>(itemName: T, value: Storage[T] extends BehaviorSubject<infer X> ? X : never): void {
+    this._storage[itemName].next(value as any);
   }
 
-  public getItemValue(itemName: string) {
-    this._checkStorageItem(itemName);
-
-    return this[`_${itemName}`].value
-  }
-
-  private _checkStorageItem(itemName: string): void {
-    if (this[`_${itemName}`] === undefined) {
-      throw `"${itemName}" missing from storage`;
-    }
+  public getItem<T extends keyof Storage>(itemName: T): Storage[T] {
+    return this._storage[itemName];
   }
 }
