@@ -1,16 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { AuthInterceptor } from '@services/auth.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapComponent } from './components/map/map.component';
 import { LoginComponent } from './views/login/login.component';
 import { PlacesSuggestComponent } from './components/places-suggest/places-suggest.component';
 import { ProfileComponent } from './views/profile/profile.component';
-import { AuthInterceptor } from '@services/auth.interceptor';
 import { SignUpComponent } from './views/sign-up/sign-up.component';
 import { TripsComponent } from './views/trips/trips.component';
 import { AddTripComponent } from './views/add-trip/add-trip.component';
