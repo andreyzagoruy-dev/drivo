@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AuthService } from '@services/auth.service';
@@ -10,10 +10,9 @@ import { StorageService } from '@services/storage.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-
-  email: string;
-  password: string;
+export class LoginComponent {
+  public email: string;
+  public password: string;
 
   constructor(
     private router: Router,
@@ -22,18 +21,14 @@ export class LoginComponent implements OnInit {
     private storage: StorageService,
   ) { }
 
-  ngOnInit() {
-  }
-
   login() {
     this.auth.login(this.email, this.password)
       .pipe(
-        switchMap(response => this.api.getUserById(response.user_id))
+        switchMap((response) => this.api.getUserById(response.id))
       )
       .subscribe((response) => {
         this.storage.setItem('userProfile', response);
         this.router.navigate(['/trips']);
       });
   }
-
 }

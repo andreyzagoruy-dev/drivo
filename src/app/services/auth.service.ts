@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { User } from '@models/user';
+import { environment } from '@environments/environment';
 
-const API_URL: string = '//localhost:3000/api'
+const API_BASE_URL = environment.apiBaseUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +17,20 @@ export class AuthService {
     const body = {
       email,
       password
-    }
+    };
 
-    return this.http.post(`${API_URL}/users/login`, body)
+    return this.http.post(`${API_BASE_URL}/users/login`, body)
       .pipe(
         tap(this.saveUser)
-      )
+      );
   }
 
   public logout() {
-    this._removeUser();
+    this.removeUser();
   }
 
   public isLoggedIn(): boolean {
-    return this.getUserToken() ? true : false;
+    return !!this.getUserToken();
   }
 
   public getUserToken(): string {
@@ -45,7 +46,7 @@ export class AuthService {
     localStorage.setItem('token', user.token);
   }
 
-  private _removeUser(): void {
+  private removeUser(): void {
     localStorage.removeItem('user_id');
     localStorage.removeItem('token');
   }
