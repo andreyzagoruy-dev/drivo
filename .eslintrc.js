@@ -23,6 +23,9 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     'no-empty-function': ["error", { "allow": ["constructors"] }],
     'lines-between-class-members': ["error", "always", { exceptAfterSingleLine: true }],
-    'no-param-reassign': 'off'
+    'no-param-reassign': 'off',
+    'import/extensions': 'off',
+    'object-curly-newline': ["error", { "ImportDeclaration": "never", "ExportDeclaration": "never" }],
+    'no-unused-expressions': ["error", { "allowShortCircuit": true }]
   }
 };

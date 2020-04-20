@@ -1,7 +1,7 @@
 import { Component, OnChanges, Input, ViewChild, OnInit } from '@angular/core';
 import { Map, Marker, Polyline, tileLayer } from 'leaflet';
-import { icons } from './icons'
 import { LatLng } from '@models/map';
+import { icons } from './icons';
 
 @Component({
   selector: 'app-map',
@@ -9,72 +9,68 @@ import { LatLng } from '@models/map';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, OnChanges {
-
-  @ViewChild('map', { static: true }) mapReference;
+  @ViewChild('mapContainer', { static: true }) mapReference;
   @Input() markers: LatLng[] = [];
   @Input() home: LatLng = null;
   @Input() route: LatLng[] = [];
 
-  private _map;
-
-  constructor() {}
+  private map;
 
   ngOnInit() {
-    this._initMap();
-    this._renderMap();
-    this._renderObjectsOnMap();
+    this.initMap();
+    this.renderMap();
+    this.renderObjectsOnMap();
   }
 
   ngOnChanges() {
-    this._map && this._renderObjectsOnMap();
+    this.map && this.renderObjectsOnMap();
   }
 
-  private _initMap(): void {
-    this._map = new Map(this.mapReference.nativeElement, {});
+  private initMap(): void {
+    this.map = new Map(this.mapReference.nativeElement, {});
   }
 
-  private _renderMap(): void {
+  private renderMap(): void {
     const tiles = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
-    tiles.addTo(this._map);
+    tiles.addTo(this.map);
   }
 
-  private _renderObjectsOnMap() {
-    this._renderMarkers();
-    this._renderHome();
-    this._renderPath();
+  private renderObjectsOnMap() {
+    this.renderMarkers();
+    this.renderHome();
+    this.renderPath();
   }
 
-  private _renderMarkers(): void {
+  private renderMarkers(): void {
     this.markers.forEach((point: any) => {
-      const marker = this._createMarker(point, 'default');
-      marker.addTo(this._map);
+      const marker = this.createMarker(point, 'default');
+      marker.addTo(this.map);
     });
   }
 
-  private _renderHome(): void {
+  private renderHome(): void {
     if (!this.home) return;
 
-    const homeMarker = this._createMarker(this.home, 'home');
-    homeMarker.addTo(this._map);
+    const homeMarker = this.createMarker(this.home, 'home');
+    homeMarker.addTo(this.map);
   }
 
-  private _createMarker(location, type: string): Marker {
+  private createMarker(location, type: string): Marker {
     type = type.toLowerCase();
-    return new Marker(location, {icon: icons[type]});
+    return new Marker(location, { icon: icons[type] });
   }
 
-  private _renderPath(): void {
-    const path = this._createPath(this.route as []);
-    path.addTo(this._map);
-    this._map.fitBounds(path.getBounds());
+  private renderPath(): void {
+    const path = this.createPath(this.route as []);
+    path.addTo(this.map);
+    this.map.fitBounds(path.getBounds());
   }
 
-  private _createPath(waypoints: []): Polyline {
-    return new Polyline(waypoints, {color: 'red'});
+  private createPath(waypoints: []): Polyline {
+    return new Polyline(waypoints, { color: 'red' });
   }
-
 }

@@ -11,4 +11,4 @@ export const icons = {
     iconSize: [32, 32],
     iconAnchor: [0, 16]
   })
-}
+};
