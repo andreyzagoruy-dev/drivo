@@ -2,7 +2,7 @@
 <form class="form" (ngSubmit)="onSubmit()" #profileForm="ngForm">
   <label class="form__input">
     Ім'я:
-    <input type="text" [(ngModel)]="profile.fullname" name="fullname" #fullname="ngModel" required>
+    <input type="text" [(ngModel)]="user.fullname" name="fullname" required>
   </label>
   <label class="form__input">
     Адреса роботи:
@@ -17,5 +17,5 @@
 </form>
 
 <p>
-  Form Value: {{ profile | json }}
+  Form Value: {{ user | json }}
 </p>

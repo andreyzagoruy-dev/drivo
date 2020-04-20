@@ -16,29 +16,30 @@ export class PlacesSuggestComponent implements OnInit {
   public suggestedPlaces = [];
 
   @Output() addLocation = new EventEmitter<any>();
-    setPlace(place: any) {
-      this.showAddress(place.title);
-      this.addLocation.emit(place.position);
-    }
 
   constructor(private placesGeocode: PlacesGeocodeService) { }
 
   ngOnInit() {
     this.searchQuery.valueChanges
       .pipe(
-        filter(place => place.length),
+        filter((place) => place.length),
         debounceTime(1500)
       )
-      .subscribe(address => {
-      this.placesGeocode.suggest(address).subscribe((places: any) => {
-        this.suggestedPlaces = places.items;
-        console.log(places);
+      .subscribe((address) => {
+        this.placesGeocode.suggest(address).subscribe((places: any) => {
+          this.suggestedPlaces = places.items;
+        });
       });
-    });
   }
 
+  setPlace(place: any) {
+    this.showAddress(place.title);
+    this.addLocation.emit(place.position);
+  }
+
+
   showAddress(place: string): boolean {
-    if (place.length !== 0){
+    if (place.length !== 0) {
       this.address = place;
       return true;
     }
@@ -47,7 +48,5 @@ export class PlacesSuggestComponent implements OnInit {
 
   cleanAddress(): void {
     this.address = '';
-    event.preventDefault()
   }
-
 }

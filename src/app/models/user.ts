@@ -5,6 +5,7 @@ interface UnauthorizedUser {
 
 interface User extends UnauthorizedUser {
   id: number;
+  token?: string;
   fullname: string;
   homeLatitude: number;
   homeLongitude: number;
@@ -12,4 +13,4 @@ interface User extends UnauthorizedUser {
   workLongitude: number;
 }
 
-export { UnauthorizedUser, User }
+export { UnauthorizedUser, User };

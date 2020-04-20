@@ -8,7 +8,6 @@ import { filter, first } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserProfileResolver implements Resolve<User> {
-
   constructor(
     private storage: StorageService
   ) { }
@@ -18,5 +17,5 @@ export class UserProfileResolver implements Resolve<User> {
       filter((userProfile) => userProfile !== null),
       first()
     );
-  } 
+  }
 }

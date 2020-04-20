@@ -22,5 +22,5 @@ module.exports = {
     'import/no-unresolved': 'off',
     'comma-dangle': ['error', 'never'],
     'no-empty-function': ["error", { "allow": ["constructors"] }]
-  },
+  }
 };

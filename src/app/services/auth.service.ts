@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
+import { User } from '@models/user';
 
 const API_URL: string = '//localhost:3000/api'
 
@@ -39,9 +40,9 @@ export class AuthService {
     return Number(localStorage.getItem('user_id'));
   }
 
-  public saveUser(response): void {
-    localStorage.setItem('user_id', response.user_id);
-    localStorage.setItem('token', response.token);
+  public saveUser(user: User): void {
+    localStorage.setItem('user_id', user.id.toString());
+    localStorage.setItem('token', user.token);
   }
 
   private _removeUser(): void {

@@ -13,9 +13,8 @@ const API_BASE_URL = environment.apiBaseUrl;
   providedIn: 'root'
 })
 export class ApiService {
-
   constructor(
-    private http: HttpClient,
+    private http: HttpClient
   ) { }
 
   public getUserById(id: number): Observable<User> {
@@ -53,16 +52,16 @@ export class ApiService {
     // return this.http.get<Trip[]>(`${API_BASE_URL}/trips/?lat=${waypoint[0]}&lng=${waypoint[1]}`);
   }
 
-  public addUser(email: string, password: string) {
+  public addUser(email: string, password: string): Observable<User> {
     const body = {
       email,
       password
-    }
-    return this.http.post(`${API_BASE_URL}/users/`, body)
+    };
 
+    return this.http.post<User>(`${API_BASE_URL}/users/`, body);
   }
 
-  public updateProfile(body: User, id: number) {
-    return this.http.put(`${API_BASE_URL}/users/${id}`, body)
+  public updateProfile(userProfile: User, id: number) {
+    return this.http.put(`${API_BASE_URL}/users/${id}`, userProfile);
   }
 }

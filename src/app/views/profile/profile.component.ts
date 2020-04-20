@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@services/api.service';
-import { StorageService } from '@services/storage.service'
+import { StorageService } from '@services/storage.service';
 import { User } from '@models/user';
 
 @Component({
@@ -10,40 +10,31 @@ import { User } from '@models/user';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-
-  public profile: User;
+  public user: User;
 
   constructor(
     private api: ApiService,
-    private storage: StorageService
+    private storage: StorageService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.storage.getItem("userProfile").subscribe( user => {
-      this.profile = user;
-      if(this.profile === null) {
-        this.api.getUserById(Number(localStorage.getItem('user_id'))).
-        subscribe((data: User) => {
-            this.storage.setItem("userProfile", data)
-          })
-      }
-    })
+    this.user = this.route.snapshot.data.userProfile;
   }
 
   workLocation(location) {
-    this.profile.workLatitude = location.lat;
-    this.profile.workLongitude = location.lng;
-  };
-
-  homeLocation(location) {
-    this.profile.homeLatitude = location.lat;
-    this.profile.homeLongitude = location.lng;
-  };
-
-  onSubmit() {
-    this.api.updateProfile(this.profile, Number(localStorage.getItem('user_id'))).subscribe((data: Record<string, any>) => {
-      console.log(data);
-    });
+    this.user.workLatitude = location.lat;
+    this.user.workLongitude = location.lng;
   }
 
+  homeLocation(location) {
+    this.user.homeLatitude = location.lat;
+    this.user.homeLongitude = location.lng;
+  }
+
+  onSubmit() {
+    this.api.updateProfile(this.user, this.user.id).subscribe((data) => {
+      this.storage.setItem('userProfile', this.user);
+    });
+  }
 }

@@ -14,8 +14,8 @@ export class AppComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private api: ApiService,
-    private storage: StorageService,
-  ) {}
+    private storage: StorageService
+  ) { }
 
   ngOnInit() {
     if (this.auth.isLoggedIn()) {
@@ -35,5 +35,4 @@ export class AppComponent implements OnInit {
   isLogin(): boolean {
     return this.auth.isLoggedIn();
   }
-
 }
