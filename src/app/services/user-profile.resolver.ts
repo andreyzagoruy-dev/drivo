@@ -11,9 +11,10 @@ export class UserProfileResolver implements Resolve<User> {
   constructor(private storage: StorageService) { }
 
   resolve() {
-    return this.storage.getItem('userProfile').pipe(
-      filter((userProfile) => userProfile !== null),
-      first()
-    );
+    return this.storage.getItem('userProfile')
+      .pipe(
+        filter((userProfile) => userProfile !== null),
+        first()
+      );
   }
 }

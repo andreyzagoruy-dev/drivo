@@ -8,7 +8,6 @@ import { LatLng } from '@app/models/map';
   styleUrls: ['./add-trip.component.scss']
 })
 export class AddTripComponent implements OnInit {
-
   public tripRoute: LatLng[] = [];
 
   constructor(
@@ -18,5 +17,4 @@ export class AddTripComponent implements OnInit {
   ngOnInit() {
     this.tripRoute = this.route.snapshot.data.tripRoute;
   }
-
 }

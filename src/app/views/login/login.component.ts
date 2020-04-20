@@ -18,7 +18,7 @@ export class LoginComponent {
     private router: Router,
     private api: ApiService,
     private auth: AuthService,
-    private storage: StorageService,
+    private storage: StorageService
   ) { }
 
   login() {
