@@ -20,5 +20,7 @@ module.exports = {
   ],
   rules: {
     'import/no-unresolved': 'off',
+    'comma-dangle': 'never',
+    'no-empty-function': ["error", { "allow": ["constructors"] }]
   },
 };
