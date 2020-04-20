@@ -8,9 +8,7 @@ import { filter, first } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserProfileResolver implements Resolve<User> {
-  constructor(
-    private storage: StorageService
-  ) { }
+  constructor(private storage: StorageService) { }
 
   resolve() {
     return this.storage.getItem('userProfile').pipe(

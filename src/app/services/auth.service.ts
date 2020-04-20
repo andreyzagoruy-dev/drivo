@@ -10,7 +10,6 @@ const API_BASE_URL = environment.apiBaseUrl;
   providedIn: 'root'
 })
 export class AuthService {
-
   constructor(private http: HttpClient) { }
 
   public login(email: string, password: string) {

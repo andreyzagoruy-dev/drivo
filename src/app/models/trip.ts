@@ -1,6 +1,6 @@
 import { Car } from '@models/car';
 import { LatLng } from '@models/map';
-import { Passanger } from './passanger';
+import { Passanger } from '@models/passanger';
 
 interface Trip {
     id?: number;
@@ -15,4 +15,3 @@ interface Trip {
 }
 
 export { Trip };
-

@@ -11,25 +11,29 @@ import { User } from '@models/user';
   providedIn: 'root'
 })
 export class TripRouteResolver implements Resolve<LatLng[]> {
-
   constructor(
     private router: Router,
     private api: ApiService,
-    private storage: StorageService,
+    private storage: StorageService
   ) { }
 
   resolve() {
     const userProfile: User = this.storage.getItem('userProfile').value;
 
     if (!userProfile) {
-        this.router.navigate(['trips']);
-        return EMPTY;
+      this.router.navigate(['trips']);
+      return EMPTY;
     }
 
-    const { homeLatitude, homeLongitude, workLatitude, workLongitude } = userProfile;
+    const {
+      homeLatitude,
+      homeLongitude,
+      workLatitude,
+      workLongitude
+    } = userProfile;
 
     return this.api.getRoute([homeLatitude, homeLongitude], [workLatitude, workLongitude]).pipe(
       first()
     );
-  } 
+  }
 }

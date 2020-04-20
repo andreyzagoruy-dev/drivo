@@ -9,7 +9,6 @@ const API_KEY = environment.apiMapsKey;
   providedIn: 'root'
 })
 export class PlacesGeocodeService {
-
   constructor(private http: HttpClient) { }
 
   public suggest(searchQuery: string) {
