@@ -1,9 +1,6 @@
-<div [hidden]="address">
+<div>
   <input type="text" [formControl]="searchQuery" required>
-  <ul>
+  <ul [hidden]="address">
     <li class="item" *ngFor = "let place of suggestedPlaces" (click)=setPlace(place)>{{place.title}}</li>
   </ul>
 </div>
-
-<p [hidden]="!address">{{address}}</p>
-<button [hidden]="!address" (click)=cleanAddress()>Змінити адресу</button>

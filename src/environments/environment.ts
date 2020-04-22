@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiBaseUrl: '//localhost:3000/api',
-  apiMapsUrl: 'https://geocode.search.hereapi.com/v1/geocode?apiKey=',
+  apiMapsUrl: 'https://autosuggest.search.hereapi.com/v1/autosuggest?apiKey=',
   apiMapsKey: 'PlBaCE42NHOrkIaoJA_XyUfT8ea0HIUaLpumgDgADrE',
 };
 

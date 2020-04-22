@@ -35,6 +35,8 @@ export class ProfileComponent implements OnInit {
   onSubmit() {
     this.api.updateProfile(this.user, this.user.id).subscribe((data) => {
       this.storage.setItem('userProfile', this.user);
+      console.log(data);
     });
   }
+
 }
