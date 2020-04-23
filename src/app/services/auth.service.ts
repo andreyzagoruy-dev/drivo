@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { User } from '@models/user';
@@ -10,7 +11,10 @@ const API_BASE_URL = environment.apiBaseUrl;
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   public login(email: string, password: string) {
     const body = {
@@ -26,6 +30,7 @@ export class AuthService {
 
   public logout() {
     this.removeUser();
+    this.router.navigate(['login']);
   }
 
   public isLoggedIn(): boolean {
