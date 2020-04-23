@@ -6,6 +6,8 @@ interface Trip {
     id?: number;
     driverId: number;
     departureTime: number;
+    startLatitude: number;
+    startLongitude: number;
     seatsTotal: number;
     seatsLeft: number;
     car: Car;
