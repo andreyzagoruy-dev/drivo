@@ -1,1 +1,27 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
 
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #FFF;
+    background-color: #111;
+    padding: .5rem 1rem;
+}
+
+.main-header__menu-button {
+    padding: 0;
+}
+
+.main-header__menu-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.views {
+    flex: 2;
+}

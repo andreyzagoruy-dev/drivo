@@ -1,5 +1,5 @@
 import { Component, OnChanges, Input, ViewChild, OnInit } from '@angular/core';
-import { Map, Marker, Polyline, tileLayer } from 'leaflet';
+import { Map, Marker, Polyline, tileLayer, PolylineOptions } from 'leaflet';
 import { LatLng } from '@models/map';
 import { icons } from './icons';
 
@@ -14,7 +14,7 @@ export class MapComponent implements OnInit, OnChanges {
   @Input() home: LatLng = null;
   @Input() route: LatLng[] = [];
 
-  private map;
+  private map: Map;
 
   ngOnInit() {
     this.initMap();
@@ -27,13 +27,15 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   private initMap(): void {
-    this.map = new Map(this.mapReference.nativeElement, {});
+    this.map = new Map(this.mapReference.nativeElement, {
+      attributionControl: false,
+      zoomControl: false
+    });
   }
 
   private renderMap(): void {
     const tiles = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      maxZoom: 19
     });
 
     tiles.addTo(this.map);
@@ -65,12 +67,15 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   private renderPath(): void {
-    const path = this.createPath(this.route as []);
+    const outline = this.createPath(this.route as [], { color: '#000', weight: 8 });
+    const path = this.createPath(this.route as [], { color: '#FFF', weight: 6 });
+    outline.addTo(this.map);
     path.addTo(this.map);
     this.map.fitBounds(path.getBounds());
   }
 
-  private createPath(waypoints: []): Polyline {
-    return new Polyline(waypoints, { color: 'red' });
+
+  private createPath(waypoints: [], options: PolylineOptions = {}): Polyline {
+    return new Polyline(waypoints, options);
   }
 }

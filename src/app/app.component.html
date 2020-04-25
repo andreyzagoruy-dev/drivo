@@ -1,3 +1,18 @@
-<a *ngIf="!isLogin()" routerLink="/login">Login</a>
-<button *ngIf="isLogin()" (click)="logout()">logout</button>
-<router-outlet></router-outlet>
+<!--<a *ngIf="!isLogin()" routerLink="/login">Login</a>
+<button *ngIf="isLogin()" (click)="logout()">logout</button> -->
+<header class="main-header">
+    <button class="button main-header__menu-button">
+        <svg class="main-header__menu-icon icon icon--white">
+            <use xlink:href="./assets/icons.svg#menu"></use>
+        </svg>
+    </button>
+    <button
+        class="button button--white"
+        routerLink="/trips/add"
+    >
+        Create trip
+    </button>
+</header>
+<div class="views">
+    <router-outlet></router-outlet>
+</div>

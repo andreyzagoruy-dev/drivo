@@ -24,10 +24,6 @@ export class TripsComponent implements OnInit {
     this.fetchTrips();
   }
 
-  public addTrip() {
-    this.router.navigate(['trips/add']);
-  }
-
   public subscribeToTrip(trip: Trip): void {
     this.api.tripSubscribe(
       trip.id,

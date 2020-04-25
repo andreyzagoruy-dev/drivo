@@ -1,11 +1,31 @@
-.card {
-    width: 320px;
-    border-radius: .5rem;
-    box-shadow: 0 0 2px 2px rgba($color: #000000, $alpha: .3);
-    overflow: hidden;
+.trips {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
-.map {
+.trip {
+    width: 320px;
+}
+
+.trip__header {
     width: 100%;
-    height: 280px;
+    padding-bottom: 70%;
+    position: relative;
+}
+
+.trip__map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    filter: saturate(.1) brightness(1.05) contrast(1.05);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.trip__subscribe {
+    margin-top: 1rem;
+    width: 100%;
 }

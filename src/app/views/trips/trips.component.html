@@ -1,10 +1,17 @@
-<div class="card" *ngFor="let trip of trips">
-    <div class="map">
-        <app-map [route]="trip.route" [markers]="trip.waypoints || []" [home]="user.homeLocation"></app-map>
+<div class="trips">
+    <div class="card trip" *ngFor="let trip of trips">
+        <div class="trip__header">
+            <app-map class="trip__map" [route]="trip.route" [markers]="trip.waypoints || []" [home]="user.homeLocation"></app-map>
+        </div>
+        <div class="card__content">
+            <!-- <span>Car: {{trip.car.model}}({{trip.car.license}})</span> -->
+            <span>Seats: {{trip.seatsLeft}} of {{trip.seatsTotal}}</span>
+            <button
+                class="button button--grey trip__subscribe"
+                (click)="subscribeToTrip(trip)"
+            >
+                Subscribe
+            </button>
+        </div>
     </div>
-    <!-- <span>Car: {{trip.car.model}}({{trip.car.license}})</span> -->
-    <br/>
-    <span>Seats: {{trip.seatsLeft}} of {{trip.seatsTotal}}</span>
-    <button (click)="subscribeToTrip(trip)">Subscribe</button>
 </div>
-<button (click)="addTrip()">Add trip</button>
