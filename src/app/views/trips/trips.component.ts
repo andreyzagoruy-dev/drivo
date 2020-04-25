@@ -28,13 +28,25 @@ export class TripsComponent implements OnInit {
     this.router.navigate(['trips/add']);
   }
 
+  public subscribeToTrip(trip: Trip): void {
+    this.api.tripSubscribe(
+      trip.id,
+      {
+        id: this.user.id,
+        waypoint: trip.waypoint
+      }
+    )
+      .subscribe((subscribed) => {
+        console.log('Subscribed', subscribed);
+      });
+  }
+
   private fetchTrips(): void {
-    this.api.getSuggestedTrips([
-      this.user.homeLatitude,
-      this.user.homeLongitude
-    ])
+    this.api.getSuggestedTrips(this.user.homeLocation)
       .subscribe((tripsFromServer) => {
         this.trips = tripsFromServer;
+        console.log('Trips:', tripsFromServer);
+        
       });
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, AbstractControl, FormControl, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
-import { tap, switchMap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { ApiService } from '@services/api.service';
 import { AuthService } from '@services/auth.service';
 import { StorageService } from '@services/storage.service';
@@ -43,8 +43,7 @@ export class SignUpComponent {
   public add(user: UnauthorizedUser) {
     this.api.addUser(user.email.trim(), user.password.trim())
       .pipe(
-        tap(this.auth.saveUser),
-        switchMap((createdUser) => this.api.getUserById(createdUser.id))
+        tap(this.auth.saveUser)
       )
       .subscribe((userFromServer) => {
         this.storage.setItem('userProfile', userFromServer);

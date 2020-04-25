@@ -5,11 +5,10 @@ import { Passanger } from '@models/passanger';
 interface Trip {
     id?: number;
     driverId: number;
-    departureTime: number;
-    startLatitude: number;
-    startLongitude: number;
+    departureTime: Date;
+    start?: LatLng;
     seatsTotal: number;
-    seatsLeft: number;
+    seatsLeft?: number;
     car: Car;
     route: LatLng[];
     passangers?: Passanger[]; // Only available to driver

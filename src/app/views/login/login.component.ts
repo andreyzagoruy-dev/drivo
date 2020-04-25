@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import { AuthService } from '@services/auth.service';
-import { ApiService } from '@services/api.service';
 import { StorageService } from '@services/storage.service';
 
 @Component({
@@ -16,18 +14,14 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private api: ApiService,
     private auth: AuthService,
     private storage: StorageService
   ) { }
 
   login() {
     this.auth.login(this.email, this.password)
-      .pipe(
-        switchMap((response) => this.api.getUserById(response.id))
-      )
-      .subscribe((response) => {
-        this.storage.setItem('userProfile', response);
+      .subscribe((userFromServer) => {
+        this.storage.setItem('userProfile', userFromServer);
         this.router.navigate(['/trips']);
       });
   }

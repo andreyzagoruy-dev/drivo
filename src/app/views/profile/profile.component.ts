@@ -23,18 +23,17 @@ export class ProfileComponent implements OnInit {
   }
 
   workLocation(location) {
-    this.user.workLatitude = location.lat;
-    this.user.workLongitude = location.lng;
+    this.user.workLocation = [location.lat, location.lng];
   }
 
   homeLocation(location) {
-    this.user.homeLatitude = location.lat;
-    this.user.homeLongitude = location.lng;
+    this.user.homeLocation = [location.lat, location.lng];
   }
 
   onSubmit() {
-    this.api.updateProfile(this.user, this.user.id).subscribe((data) => {
-      this.storage.setItem('userProfile', this.user);
-    });
+    this.api.updateProfile(this.user, this.user.id)
+      .subscribe((userFromServer) => {
+        this.storage.setItem('userProfile', userFromServer);
+      });
   }
 }
