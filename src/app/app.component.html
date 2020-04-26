@@ -1,18 +1,30 @@
-<!--<a *ngIf="!isLogin()" routerLink="/login">Login</a>
-<button *ngIf="isLogin()" (click)="logout()">logout</button> -->
-<header class="main-header">
-    <button class="button main-header__menu-button">
+
+<header *ngIf="isLoggedIn" class="main-header">
+    <button
+        class="button main-header__menu-button"
+        (click)="toggleSidebar()"
+    >
         <svg class="main-header__menu-icon icon icon--white">
             <use xlink:href="./assets/icons.svg#menu"></use>
         </svg>
     </button>
     <button
-        class="button button--white"
+        class="button button--grey"
         routerLink="/trips/add"
     >
         Create trip
     </button>
 </header>
-<div class="views">
+<main class="views">
+    <div *ngIf="isSidebarOpen" class="sidebar">
+        <div
+            class="sidebar__overlay"
+            (click)="toggleSidebar()"
+        ></div>
+        <div class="sidebar__content">
+            <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+            <button *ngIf="isLoggedIn" (click)="logout()">logout</button>
+        </div>
+    </div>
     <router-outlet></router-outlet>
-</div>
+</main>

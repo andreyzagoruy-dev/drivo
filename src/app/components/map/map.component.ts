@@ -1,7 +1,10 @@
 import { Component, OnChanges, Input, ViewChild, OnInit } from '@angular/core';
 import { Map, Marker, Polyline, tileLayer, PolylineOptions } from 'leaflet';
+import { environment } from '@environments/environment';
 import { LatLng } from '@models/map';
 import { icons } from './icons';
+
+const API_KEY = environment.apiMapsKey;
 
 @Component({
   selector: 'app-map',
@@ -34,7 +37,7 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   private renderMap(): void {
-    const tiles = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const tiles = tileLayer(`https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/512/png8?apiKey=${API_KEY}&ppi=250`, {
       maxZoom: 19
     });
 
@@ -67,7 +70,7 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   private renderPath(): void {
-    const outline = this.createPath(this.route as [], { color: '#000', weight: 8 });
+    const outline = this.createPath(this.route as [], { color: '#432C85', weight: 8 });
     const path = this.createPath(this.route as [], { color: '#FFF', weight: 6 });
     outline.addTo(this.map);
     path.addTo(this.map);

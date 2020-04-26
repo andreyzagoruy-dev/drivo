@@ -10,6 +10,8 @@ import { StorageService } from '@services/storage.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  public isSidebarOpen = false;
+
   constructor(
     private router: Router,
     private auth: AuthService,
@@ -28,11 +30,15 @@ export class AppComponent implements OnInit {
     }
   }
 
-  logout(): void {
-    this.auth.logout();
+  get isLoggedIn(): boolean {
+    return this.auth.isLoggedIn();
   }
 
-  isLogin(): boolean {
-    return this.auth.isLoggedIn();
+  public toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  public logout(): void {
+    this.auth.logout();
   }
 }
