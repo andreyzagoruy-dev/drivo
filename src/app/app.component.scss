@@ -10,14 +10,20 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #FFF;
     background-color: #FFF;
     box-shadow: 0 0 2rem rgba(0, 0, 255, .1);
     padding: .5rem 1rem;
 }
 
+.main-header__date {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: .1rem;
+}
+
 .main-header__menu-button {
     padding: 0;
+    margin-right: 4rem;
 }
 
 .main-header__menu-icon {
