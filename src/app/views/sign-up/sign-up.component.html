@@ -1,16 +1,56 @@
-<form class="form" [formGroup]="signUpForm" (ngSubmit)=onSubmit()>
-  <label for="email"> Твій Email: </label>
-  <input class="form__input" id="email" type="email" formControlName="email" required >
-  <p class="form__input_error" *ngIf="email.invalid && email.touched">Не корректно введений email</p>
-
-  <label for="password"> Пароль </label>
-  <input class="form__input" id="password" type="password" formControlName="password" required>
-  <p class="form__input_error" *ngIf="password.invalid && password.touched">Пароль має бути не меньше 6 символів</p>
-
-  <label for="confirmPassword">Повтори пароль:</label>
-  <input class="form__input" id confirmPassword type="password" formControlName="confirmPassword" required>
-  <p class="form__input_error" *ngIf="confirmPassword.invalid && confirmPassword.touched">Пароль не співпадає</p>
-
-  <button class="button" type="submit" [disabled]="!signUpForm.valid">Зберегти</button>
-</form>
-
+<div class="card">
+  <div class="card__header">
+    <h1>Create account</h1>
+  </div>
+  <div class="card__content">
+    <form
+      class="form"
+      [formGroup]="signUpForm"
+      (ngSubmit)=onSubmit()
+    >
+      <div class="form__group">
+        <input
+          class="form__input"
+          placeholder="Email"
+          id="email" type="email"
+          formControlName="email"
+          required
+          [ngClass]="{ 'form__input--invalid': email.invalid && email.touched }"
+        >
+      </div>
+      <div class="form__group">
+        <input
+          class="form__input"
+          placeholder="Password"
+          id="password"
+          type="password"
+          formControlName="password"
+          required
+          [ngClass]="{ 'form__input--invalid': password.invalid && password.touched }"
+        >
+      </div>
+      <div class="form__group">
+        <input
+          class="form__input"
+          placeholder="Confirm password"
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          required
+          [ngClass]="{ 'form__input--invalid': confirmPassword.invalid && confirmPassword.touched }"
+        >
+      </div>
+      <div class="form__group">
+        <button
+          class="button form__button"
+          type="submit"
+          [disabled]="!signUpForm.valid"
+          [ngClass]="signUpForm.valid ? 'button--accent' : 'button--disabled'"
+        >
+          Create
+        </button>
+      </div>
+    </form>
+    <div class="h-text--center h-mt--sm">Already have an account? <a class="link" routerLink="/login">Login</a></div>
+  </div>
+</div>

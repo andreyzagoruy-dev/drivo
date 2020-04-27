@@ -17,7 +17,9 @@
       <div class="form__group">
         <button
           class="button form__button"
-          [ngClass]="loginForm.form.valid ? 'button--accent' : 'button--disabled'" type="submit"
+          type="submit"
+          [disabled]="!loginForm.form.valid"
+          [ngClass]="loginForm.form.valid ? 'button--accent' : 'button--disabled'"
         >
           Login
         </button>

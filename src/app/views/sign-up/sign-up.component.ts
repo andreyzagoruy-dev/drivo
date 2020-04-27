@@ -16,9 +16,9 @@ export class SignUpComponent {
   user: UnauthorizedUser;
 
   signUpForm = new FormGroup({
-    email: new FormControl('test@gmail.ua', [Validators.required, Validators.email]),
-    password: new FormControl('123456', [Validators.required, Validators.minLength(6)]),
-    confirmPassword: new FormControl('123456', [Validators.required, this.isCheckPassword()])
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    confirmPassword: new FormControl('', [Validators.required, this.isCheckPassword()])
   });
 
   constructor(
