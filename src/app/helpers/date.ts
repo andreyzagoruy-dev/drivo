@@ -31,4 +31,8 @@ function getPrettyDate(date: Date): string {
   return `${day}, ${date.getDate()} ${month} ${year}`;
 }
 
-export { getPrettyDate };
+function getPrettyTime(date: Date): string {
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+export { getPrettyDate, getPrettyTime };

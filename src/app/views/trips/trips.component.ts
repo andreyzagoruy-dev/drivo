@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '@services/api.service';
 import { Trip } from '@models/trip';
 import { User } from '@models/user';
+import { getPrettyTime } from '@app/helpers/date';
 
 @Component({
   selector: 'app-trips',
@@ -12,6 +13,7 @@ import { User } from '@models/user';
 export class TripsComponent implements OnInit {
   public trips: Trip[];
   public user: User;
+  public getTime = getPrettyTime;
 
   constructor(
     private router: Router,
