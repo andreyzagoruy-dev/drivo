@@ -1,12 +1,42 @@
 <div class="card trip" *ngFor="let trip of trips">
     <div class="trip__header">
-        <app-map class="trip__map" [route]="trip.route" [markers]="trip.waypoints || []" [home]="user.homeLocation"></app-map>
+        <app-map class="trip__map" [route]="trip.route" [markers]="trip.waypoints || []" [home]="[49.4416963, 32.0636261]"></app-map>
     </div>
-    <div class="card__content">
-        <span>Car: {{trip.car.model}}({{trip.car.license}})</span>
-        <span>Seats: {{trip.seatsLeft}} of {{trip.seatsTotal}}</span>
+    <div class="card__content trip__content">
+        <div class="trip__description">
+            <span class="trip__description-label">
+                Car model:
+            </span>
+            <span class="trip__description-value">
+                {{trip.car.model}}
+            </span>
+        </div>
+        <div class="trip__description">
+            <span class="trip__description-label">
+                Car license:
+            </span>
+            <span class="trip__description-value">
+                {{trip.car.license}}
+            </span>
+        </div>
+        <div class="trip__description">
+            <span class="trip__description-label">
+                Seats left:
+            </span>
+            <span class="trip__description-value">
+                {{trip.seatsLeft}} of {{trip.seatsTotal}}
+            </span>
+        </div>
+        <div class="trip__description">
+            <span class="trip__description-label">
+                Departure:
+            </span>
+            <span class="trip__description-value">
+                {{trip.departureTime.toLocaleTimeString()}}
+            </span>
+        </div>
         <button
-            class="button button--grey trip__subscribe"
+            class="button button--secondary trip__subscribe"
             (click)="subscribeToTrip(trip)"
         >
             Subscribe

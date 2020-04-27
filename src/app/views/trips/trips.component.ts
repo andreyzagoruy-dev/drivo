@@ -42,7 +42,6 @@ export class TripsComponent implements OnInit {
       .subscribe((tripsFromServer) => {
         this.trips = tripsFromServer;
         console.log('Trips:', tripsFromServer);
-        
       });
   }
 }

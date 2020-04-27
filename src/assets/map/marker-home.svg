@@ -1,7 +1,12 @@
 <svg height="512" viewBox="-16 -16 224 224" width="512" xmlns="http://www.w3.org/2000/svg">
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="rgba(0, 0, 255, 0.1)"/>
-    </filter>
-    <path d="m96 0a72.081 72.081 0 0 0 -72 72c0 50.73 63.634 114.948 66.343 117.657a8.078 8.078 0 0 0 11.314 0c2.709-2.709 66.343-66.927 66.343-117.657a72.081 72.081 0 0 0 -72-72zm0 120a48 48 0 1 1 48-48 48 48 0 0 1 -48 48z" fill="#432C85" filter="url(#shadow)"/>
-    <path d="m129.789 60.422-32-16a4 4 0 0 0 -3.578 0l-32 16 3.578 7.156 10.211-5.106v25.528a4 4 0 0 0 4 4h32a4 4 0 0 0 4-4v-25.528l10.211 5.106z" fill="#432C85"/>
+    <defs>
+      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#66a6ff;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#5ee7df;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <g stroke="#3F7FEF" stroke-width="4">
+      <path d="m96 0a72.081 72.081 0 0 0 -72 72c0 50.73 63.634 114.948 66.343 117.657a8.078 8.078 0 0 0 11.314 0c2.709-2.709 66.343-66.927 66.343-117.657a72.081 72.081 0 0 0 -72-72zm0 120a48 48 0 1 1 48-48 48 48 0 0 1 -48 48z" fill="url(#gradient)" />
+      <path d="m129.789 60.422-32-16a4 4 0 0 0 -3.578 0l-32 16 3.578 7.156 10.211-5.106v25.528a4 4 0 0 0 4 4h32a4 4 0 0 0 4-4v-25.528l10.211 5.106z" fill="url(#gradient)" />
+    </g>
 </svg>

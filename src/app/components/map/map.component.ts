@@ -70,13 +70,12 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   private renderPath(): void {
-    const outline = this.createPath(this.route as [], { color: '#432C85', weight: 8 });
+    const outline = this.createPath(this.route as [], { color: '#3F7FEF', weight: 8 });
     const path = this.createPath(this.route as [], { color: '#FFF', weight: 6 });
     outline.addTo(this.map);
     path.addTo(this.map);
     this.map.fitBounds(path.getBounds());
   }
-
 
   private createPath(waypoints: [], options: PolylineOptions = {}): Polyline {
     return new Polyline(waypoints, options);
