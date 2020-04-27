@@ -16,6 +16,7 @@ html {
   --link-color: #FF3A82;
   --border-color: #F6F6F6;
   --highlight-color: rgba(0, 0, 255, .1);
+  --input-shadow-color: rgba(0, 0, 255, .3);
   --overlay-color: rgba(12, 16, 102, .3);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: var(--text-primary-color);
@@ -47,6 +48,10 @@ html {
   background-color: var(--disabled-color);
 }
 
+.link {
+  color: var(--link-color);
+}
+
 .icon {
   width: 1rem;
   height: 1rem;
@@ -63,6 +68,62 @@ html {
   box-shadow: 0 0 1.25rem var(--highlight-color);
 }
 
+.card__header {
+  text-align: center;
+  padding: 2rem 2rem 0;
+}
+
+.card__header--borderless {
+  padding: 0;
+}
+
 .card__content {
   padding: 2rem;
+}
+
+.form {
+  text-align: center;
+  padding: 1rem;
+}
+
+.form__group + .form__group {
+  margin-top: 2rem;
+}
+
+.form__input {
+  appearance: none;
+  border: none;
+  min-width: 220px;
+  font-size: 1rem;
+  padding: 1.125rem 1.5rem;
+  border-radius: 1.75rem;
+  box-shadow: 0 0 2rem var(--input-shadow-color);
+}
+
+.form__input:focus {
+  border: 1px solid var(--input-shadow-color);
+  padding: calc(1.125rem - 1px) calc(1.5rem - 1px);
+}
+
+.form__button {
+  margin-top: 1rem;
+  padding: 1.125rem 3rem;
+}
+
+/*
+  Helper classes
+*/
+
+.h-mt--sm {
+  margin-top: 1rem;
+}
+
+.h-text--center {
+  text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+  .h-hide--mobile {
+    display: none;
+  }
 }
