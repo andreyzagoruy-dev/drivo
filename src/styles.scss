@@ -63,6 +63,7 @@ html {
 }
 
 .card {
+  position: relative;
   background-color: #FFF;
   border-radius: 1rem;
   overflow: hidden;
@@ -93,6 +94,7 @@ html {
 
 .form__input {
   appearance: none;
+  outline: none;
   border: none;
   min-width: 220px;
   font-size: 1rem;
@@ -104,6 +106,37 @@ html {
 .form__input:focus {
   border: 1px solid var(--input-shadow-color);
   padding: calc(1.125rem - 1px) calc(1.5rem - 1px);
+}
+
+.form__field {
+  position: relative;
+}
+
+.form__field--icon .form__input {
+  padding-right: 2.75rem;
+}
+
+.form__field--icon::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: .875rem;
+  width: 1rem;
+  height: 1rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.form__field--icon-arrow-down::after {
+  mask-image: url("/assets/icons.svg#arrow-down");
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: 50% 50%;
+}
+
+.form__field--icon-color-accent::after {
+  background-color: var(--primary-accent-color);
 }
 
 .form__input--invalid {

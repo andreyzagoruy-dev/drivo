@@ -11,10 +11,17 @@ import { User } from '@app/models/user';
   styleUrls: ['./add-trip.component.scss']
 })
 export class AddTripComponent implements OnInit {
-  public user: User;
+  public user: User = this.route.snapshot.data.userProfile;
   public cars: Car[] = [];
   public dates: Date[] = [];
-  public trip: Trip;
+  public trip: Trip = {
+    driverId: this.user.id,
+    departureTime: null,
+    start: this.user.workLocation,
+    seatsTotal: null,
+    car: null,
+    route: this.route.snapshot.data.tripRoute
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -22,15 +29,6 @@ export class AddTripComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.user = this.route.snapshot.data.userProfile;
-    this.trip = {
-      driverId: this.user.id,
-      departureTime: null,
-      start: this.user.workLocation,
-      seatsTotal: 3,
-      car: null,
-      route: this.route.snapshot.data.tripRoute
-    };
     this.fetchCars();
     this.generateDates();
   }
