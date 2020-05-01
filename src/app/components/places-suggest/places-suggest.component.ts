@@ -9,7 +9,8 @@ import { debounceTime, filter } from 'rxjs/operators';
   styleUrls: ['./places-suggest.component.scss']
 })
 export class PlacesSuggestComponent implements OnInit {
-  public address = '';
+  public address = false;
+  public code = '0,0';
 
   public searchQuery = new FormControl('');
 
@@ -19,34 +20,33 @@ export class PlacesSuggestComponent implements OnInit {
 
   constructor(private placesGeocode: PlacesGeocodeService) { }
 
-  ngOnInit() {
+ ngOnInit() {
+    this.placesGeocode.getPosition().then( pos =>{
+      this.code =`${pos.lat},${pos.lng}`;
+    });
+
     this.searchQuery.valueChanges
       .pipe(
         filter((place) => place.length),
         debounceTime(1500)
       )
       .subscribe((address) => {
-        this.placesGeocode.suggest(address).subscribe((places: any) => {
+        this.placesGeocode.suggest(address, this.code).subscribe((places: any) => {
+          this.address = false;
           this.suggestedPlaces = places.items;
+
         });
       });
   }
 
   setPlace(place: any) {
-    this.showAddress(place.title);
-    this.addLocation.emit(place.position);
-  }
-
-
-  showAddress(place: string): boolean {
-    if (place.length !== 0) {
-      this.address = place;
-      return true;
+    if(place.address.houseNumber){
+      this.searchQuery.setValue(`${place.address.city}, ${place.address.street}, ${place.address.houseNumber}`);
+      this.addLocation.emit(place.position);
+      this.address = true;
+    } else {
+      this.searchQuery.setValue(`${place.address.city}, ${place.address.street},`);
     }
-    return false;
-  }
 
-  cleanAddress(): void {
-    this.address = '';
   }
 }
