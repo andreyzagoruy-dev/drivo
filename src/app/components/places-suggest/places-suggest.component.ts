@@ -26,21 +26,26 @@ export class PlacesSuggestComponent implements AfterContentInit {
         switchMap((inputValue) => this.placesGeocode.suggest(inputValue))
       )
       .subscribe((places) => {
-        this.isShowSuggestions = true;
         this.suggestedPlaces = places.items;
+        this.isShowSuggestions = !!places.items.length && this.input.focus.getValue();
+      });
+
+    this.input.focus
+      .subscribe((focusState) => {
+        this.isShowSuggestions = focusState && this.suggestedPlaces.length !== 0;
       });
   }
 
   public setPlace(place: HereMapsPlace): void {
     this.addLocation.emit({ ...place, prettyAddress: this.getPrettyAddress(place) });
-    this.isShowSuggestions = false;
   }
 
   public getPrettyAddress(place: HereMapsPlace): string {
-    return `${place.address.street},
-            ${place.address.houseNumber ? place.address.houseNumber + ',' : ''}
-            ${place.address.city},
-            ${place.address.countryName}`
+    const { street, houseNumber, city, countryName } = place.address;
+    return `${street ? street + ',' : ''}
+            ${houseNumber ? houseNumber + ',' : ''}
+            ${city ? city + ',' : ''}
+            ${countryName ? countryName + ',' : ''}`
       .replace(/\n(\s+)/gm, ' ');
   }
 }

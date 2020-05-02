@@ -2,12 +2,12 @@
   <ng-content></ng-content>
   <ul
     class="autocomplete__suggestions suggestions card"
-    [hidden]="!isShowSuggestions || suggestedPlaces.length === 0"
+    [hidden]="!isShowSuggestions"
   >
     <li
       class="suggestions__item"
       *ngFor = "let place of suggestedPlaces"
-      (click)=setPlace(place)
+      (mousedown)=setPlace(place)
     >
       {{getPrettyAddress(place)}}
     </li>
