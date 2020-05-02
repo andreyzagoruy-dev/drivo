@@ -20,24 +20,32 @@
       </div>
       <div class="form__group">
         <app-places-suggest (addLocation)="setLocation('home', $event)">
-          <input
-            inputListener
-            class="form__input"
-            placeholder="Home address"
-            type="text"
-            [value]="user.homeAddress"
+          <div
+            class="form__field form__field--icon form__field--icon-color-accent form__field--icon-house"
           >
+            <input
+              inputListener
+              class="form__input"
+              placeholder="Home address"
+              type="text"
+              [value]="user.homeAddress"
+            >
+          </div>
         </app-places-suggest>
       </div>
       <div class="form__group">
         <app-places-suggest (addLocation)="setLocation('work', $event)">
-          <input
-            inputListener
-            class="form__input"
-            placeholder="Work address"
-            type="text"
-            [value]="user.workAddress"
+          <div
+            class="form__field form__field--icon form__field--icon-color-accent form__field--icon-work"
           >
+            <input
+              inputListener
+              class="form__input"
+              placeholder="Work address"
+              type="text"
+              [value]="user.workAddress"
+            >
+          </div>
         </app-places-suggest>
       </div>
       <div class="form__group">
