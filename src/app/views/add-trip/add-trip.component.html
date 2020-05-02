@@ -9,7 +9,7 @@
             (ngSubmit)="addTrip()"
         >
             <div class="form__group">
-                <div class="form__field form__field--icon form__field--icon-color-accent form__field--icon-arrow-down">
+                <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
                     <select
                         class="form__input"
                         name="car"
@@ -36,7 +36,7 @@
                 >
             </div>
             <div class="form__group">
-                <div class="form__field form__field--icon form__field--icon-color-accent form__field--icon-arrow-down">
+                <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
                     <select class="form__input" name="date" id="date" required [(ngModel)]="trip.departureTime">
                         <option value="null">Departure time</option>
                         <option *ngFor="let date of dates" [ngValue]="date" >

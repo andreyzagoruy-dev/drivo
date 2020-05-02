@@ -146,6 +146,10 @@ html {
   background-color: var(--primary-accent-color);
 }
 
+.form__field--icon-color-secondary::after {
+  background-color: var(--secondary-color);
+}
+
 .form__input--invalid {
   box-shadow: 0 0 2rem var(--input-invalid-shadow-color);
 }
