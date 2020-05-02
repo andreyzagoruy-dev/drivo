@@ -1,6 +1,9 @@
 <div class="autocomplete">
   <ng-content></ng-content>
-  <ul class="autocomplete__suggestions suggestions card" [hidden]="!isShowSuggestions">
+  <ul
+    class="autocomplete__suggestions suggestions card"
+    [hidden]="!isShowSuggestions || suggestedPlaces.length === 0"
+  >
     <li
       class="suggestions__item"
       *ngFor = "let place of suggestedPlaces"
