@@ -12,6 +12,7 @@ import { ProfileComponent } from './views/profile/profile.component';
 import { SignUpComponent } from './views/sign-up/sign-up.component';
 import { TripsComponent } from './views/trips/trips.component';
 import { AddTripComponent } from './views/add-trip/add-trip.component';
+import { InputListenerDirective } from './directives/input-listener.directive';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AddTripComponent } from './views/add-trip/add-trip.component';
     TripsComponent,
     AddTripComponent,
     ProfileComponent,
-    SignUpComponent
+    SignUpComponent,
+    InputListenerDirective
   ],
   imports: [
     BrowserModule,

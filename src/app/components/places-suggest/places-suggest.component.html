@@ -1,5 +1,5 @@
 <div>
-  <input type="text" [formControl]="searchQuery" required>
+  <ng-content></ng-content>
   <ul [hidden]="address">
     <li class="item" *ngFor = "let place of suggestedPlaces" (click)=setPlace(place)>{{place.title}}</li>
   </ul>
