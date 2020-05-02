@@ -9,7 +9,7 @@ import { InputListenerDirective } from '@app/directives/input-listener.directive
   styleUrls: ['./places-suggest.component.scss']
 })
 export class PlacesSuggestComponent implements AfterContentInit {
-  public address = false;
+  public isShowSuggestions = false;
   public suggestedPlaces = [];
 
   @ContentChild(InputListenerDirective, { static: false }) input: InputListenerDirective;
@@ -20,19 +20,20 @@ export class PlacesSuggestComponent implements AfterContentInit {
   ngAfterContentInit() {
     this.input.changes
       .pipe(
-        filter((place) => place.length),
+        filter((inputValue) => !!inputValue.length),
         debounceTime(1500)
       )
-      .subscribe((address) => {
-        this.placesGeocode.suggest(address).subscribe((places: any) => {
-          this.address = false;
-          this.suggestedPlaces = places.items;
-        });
+      .subscribe((inputValue) => {
+        this.placesGeocode.suggest(inputValue)
+          .subscribe((places: any) => {
+            this.isShowSuggestions = true;
+            this.suggestedPlaces = places.items;
+          });
       });
   }
 
   setPlace(place: any) {
     this.addLocation.emit(place.position);
-    this.address = true;
+    this.isShowSuggestions = false;
   }
 }

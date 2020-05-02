@@ -12,6 +12,6 @@ export class PlacesGeocodeService {
   constructor(private http: HttpClient) { }
 
   public suggest(searchQuery: string) {
-    return this.http.get(`${API_URL}${API_KEY}&q=${searchQuery}&in=countryCode:UKR`);
+    return this.http.get(`${API_URL}${API_KEY}&q=${searchQuery}&limit=5&in=countryCode:UKR`);
   }
 }

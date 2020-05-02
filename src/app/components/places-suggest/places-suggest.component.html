@@ -1,6 +1,15 @@
-<div>
+<div class="autocomplete">
   <ng-content></ng-content>
-  <ul [hidden]="address">
-    <li class="item" *ngFor = "let place of suggestedPlaces" (click)=setPlace(place)>{{place.title}}</li>
+  <ul class="autocomplete__suggestions suggestions card" [hidden]="!isShowSuggestions">
+    <li
+      class="suggestions__item"
+      *ngFor = "let place of suggestedPlaces"
+      (click)=setPlace(place)
+    >
+      {{place.address.street}},
+      {{place.address.houseNumber && + place.address.houseNumber + ','}}
+      {{place.address.city}},
+      {{place.address.countryName}}
+    </li>
   </ul>
 </div>
