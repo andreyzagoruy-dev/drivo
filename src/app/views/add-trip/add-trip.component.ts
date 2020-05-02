@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '@services/api.service';
 import { Trip } from '@app/models/trip';
 import { Car } from '@app/models/car';
@@ -12,7 +12,7 @@ import { User } from '@app/models/user';
 })
 export class AddTripComponent implements OnInit {
   public user: User = this.route.snapshot.data.userProfile;
-  public cars: Car[] = [];
+  public cars: Car[] = this.route.snapshot.data.cars;
   public dates: Date[] = [];
   public trip: Trip = {
     driverId: this.user.id,
@@ -25,11 +25,11 @@ export class AddTripComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private api: ApiService
   ) {}
 
   ngOnInit() {
-    this.fetchCars();
     this.generateDates();
   }
 
@@ -50,12 +50,5 @@ export class AddTripComponent implements OnInit {
       currentDate.setMinutes(0, 0, 0);
       this.dates.push(new Date(currentDate));
     }
-  }
-
-  private fetchCars(): void {
-    this.api.getCars(this.user.id)
-      .subscribe((carsFromServer) => {
-        this.cars = carsFromServer;
-      });
   }
 }

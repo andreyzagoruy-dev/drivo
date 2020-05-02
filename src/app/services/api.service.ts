@@ -23,8 +23,16 @@ export class ApiService {
     return this.http.get<User>(`${API_BASE_URL}/users/${id}`);
   }
 
-  public getCars(id: number): Observable<Car[]> {
-    return this.http.get<Car[]>(`${API_BASE_URL}/users/${id}/cars`);
+  public getCars(userId: number): Observable<Car[]> {
+    return this.http.get<Car[]>(`${API_BASE_URL}/users/${userId}/cars`);
+  }
+
+  public addCar(userId: number, car: Car): Observable<void> {
+    return this.http.post<void>(`${API_BASE_URL}/users/${userId}/cars`, car);
+  }
+
+  public removeCar(userId: number, car: Car): Observable<void> {
+    return this.http.delete<void>(`${API_BASE_URL}/users/${userId}/cars/${car.id}`);
   }
 
   public getRoute(start: LatLng, end: LatLng): Observable<LatLng[]> {
