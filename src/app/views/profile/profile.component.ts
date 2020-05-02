@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@services/api.service';
 import { StorageService } from '@services/storage.service';
 import { User } from '@models/user';
+import { HereMapsPlace } from '@models/map';
 
 @Component({
   selector: 'app-profile',
@@ -22,15 +23,13 @@ export class ProfileComponent implements OnInit {
     this.user = this.route.snapshot.data.userProfile;
   }
 
-  workLocation(location) {
-    this.user.workLocation = [location.lat, location.lng];
+  public setLocation(type: 'work' | 'home', place: HereMapsPlace): void {
+    const { prettyAddress, position: { lat, lng } } = place;
+    this.user[`${type}Address`] = prettyAddress;
+    this.user[`${type}Location`] = [lat, lng];
   }
 
-  homeLocation(location) {
-    this.user.homeLocation = [location.lat, location.lng];
-  }
-
-  onSubmit() {
+  public onSubmit(): void {
     this.api.updateProfile(this.user, this.user.id)
       .subscribe((userFromServer) => {
         this.storage.setItem('userProfile', userFromServer);

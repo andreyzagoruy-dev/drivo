@@ -19,24 +19,24 @@
         >
       </div>
       <div class="form__group">
-        <app-places-suggest (addLocation)="homeLocation($event)">
+        <app-places-suggest (addLocation)="setLocation('home', $event)">
           <input
             inputListener
             class="form__input"
             placeholder="Home address"
             type="text"
-            required
+            [value]="user.homeAddress"
           >
         </app-places-suggest>
       </div>
       <div class="form__group">
-        <app-places-suggest (addLocation)="workLocation($event)">
+        <app-places-suggest (addLocation)="setLocation('work', $event)">
           <input
             inputListener
             class="form__input"
             placeholder="Work address"
             type="text"
-            required
+            [value]="user.workAddress"
           >
         </app-places-suggest>
       </div>

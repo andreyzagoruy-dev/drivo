@@ -9,10 +9,7 @@
       *ngFor = "let place of suggestedPlaces"
       (click)=setPlace(place)
     >
-      {{place.address.street}},
-      {{place.address.houseNumber && + place.address.houseNumber + ','}}
-      {{place.address.city}},
-      {{place.address.countryName}}
+      {{getPrettyAddress(place)}}
     </li>
   </ul>
 </div>
