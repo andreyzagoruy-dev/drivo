@@ -29,6 +29,14 @@ export class ProfileComponent implements OnInit {
     this.user[`${type}Location`] = [lat, lng];
   }
 
+  public isProfileFormValid(): boolean {
+    const { fullname, homeLocation, workLocation } = this.user;
+    const isHomeLocation = !!homeLocation.filter((coordinate) => coordinate !== 0).length;
+    const isWorkLocation = !!workLocation.filter((coordinate) => coordinate !== 0).length;
+
+    return fullname && isHomeLocation && isWorkLocation;
+  }
+
   public onSubmit(): void {
     this.api.updateProfile(this.user, this.user.id)
       .subscribe((userFromServer) => {

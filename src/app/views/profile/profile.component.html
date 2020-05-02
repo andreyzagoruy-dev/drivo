@@ -52,8 +52,8 @@
         <button
           class="button form__button"
           type="submit"
-          [ngClass]="profileForm.valid ? 'button--accent' : 'button--disabled'"
-          [disabled]="!profileForm.valid"
+          [ngClass]="isProfileFormValid() ? 'button--accent' : 'button--disabled'"
+          [disabled]="!isProfileFormValid()"
         >
           Save
         </button>
