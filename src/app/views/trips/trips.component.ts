@@ -36,6 +36,7 @@ export class TripsComponent implements OnInit {
     )
       .subscribe((subscribed) => {
         console.log('Subscribed', subscribed);
+        this.fetchTrips();
       });
   }
 

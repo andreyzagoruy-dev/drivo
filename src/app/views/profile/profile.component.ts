@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '@services/api.service';
 import { StorageService } from '@services/storage.service';
 import { User } from '@models/user';
@@ -16,7 +16,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private api: ApiService,
     private storage: StorageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -41,6 +42,7 @@ export class ProfileComponent implements OnInit {
     this.api.updateProfile(this.user, this.user.id)
       .subscribe((userFromServer) => {
         this.storage.setItem('userProfile', userFromServer);
+        this.router.navigate(['/trips']);
       });
   }
 }

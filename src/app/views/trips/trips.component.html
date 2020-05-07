@@ -1,7 +1,7 @@
 <div class="trips">
     <div class="card trip" *ngFor="let trip of trips">
         <div class="trip__header">
-            <app-map class="trip__map" [route]="trip.route" [markers]="trip.waypoints || []" [home]="[49.4416963, 32.0636261]"></app-map>
+            <app-map class="trip__map" [route]="trip.route" [markers]="trip.waypoints || []" [home]="user.homeLocation"></app-map>
         </div>
         <div class="card__content trip__content">
             <div class="trip__description">

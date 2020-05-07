@@ -68,6 +68,31 @@
     left: 0;
 }
 
+.main-nav {
+    padding: 1rem;
+}
+
+.main-nav__content {
+    list-style: none;
+}
+
+.main-nav__item {
+    cursor: pointer;
+}
+
+.main-nav__link {
+    padding: 1rem 0;
+    display: inline-block;
+    width: 100%;
+    color: var(--text-primary-color);
+    text-decoration: none;
+}
+
+.main-nav__link--active {
+    color: var(--primary-default-color);
+    border-bottom: 1px solid var(--primary-default-color);
+}
+
 .views {
     display: flex;
     flex-grow: 2;

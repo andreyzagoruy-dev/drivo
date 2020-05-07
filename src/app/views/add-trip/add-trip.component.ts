@@ -37,6 +37,7 @@ export class AddTripComponent implements OnInit {
     this.api.addTrip(this.trip)
       .subscribe((response) => {
         console.log('Trip:', response);
+        this.router.navigate(['/trips']);
       });
   }
 
