@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoadingInterceptor } from '@services/loading.interceptor';
 import { AuthInterceptor } from '@services/auth.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { TripsComponent } from './views/trips/trips.component';
 import { AddTripComponent } from './views/add-trip/add-trip.component';
 import { InputListenerDirective } from './directives/input-listener.directive';
 import { CarsComponent } from './views/cars/cars.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { CarsComponent } from './views/cars/cars.component';
     ProfileComponent,
     SignUpComponent,
     InputListenerDirective,
-    CarsComponent
+    CarsComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,11 @@ import { CarsComponent } from './views/cars/cars.component';
     ReactiveFormsModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

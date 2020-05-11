@@ -7,7 +7,7 @@
 
 html {
   --primary-default-color: #003EFF;
-  --primary-accent-color: #00FF9B;
+  --primary-accent-color: #00FB98;
   --secondary-color: #432C85;
   --disabled-color: #D3D3D3;
   --danger-color: #DC143C;
@@ -29,6 +29,7 @@ html {
   background: none;
   border: none;
   color: #FFF;
+  text-shadow: 0 0 4px var(--highlight-color);
   outline: none;
   font-size: 1rem;
   padding: 1rem 2rem;

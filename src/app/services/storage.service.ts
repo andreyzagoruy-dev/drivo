@@ -7,6 +7,7 @@ import { Storage } from '@models/storage';
 })
 export class StorageService {
   private storage: Storage = {
+    isLoading: new BehaviorSubject(false),
     userProfile: new BehaviorSubject(null)
   }
 
