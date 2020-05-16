@@ -11,7 +11,6 @@ import { getPrettyDate } from '@app/helpers/date';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public isSidebarOpen = false;
 
   constructor(
     private router: Router,
@@ -39,11 +38,7 @@ export class AppComponent implements OnInit {
     return this.auth.isLoggedIn();
   }
 
-  public toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen;
-  }
-
-  public logout(): void {
-    this.auth.logout();
+  toggleSidebar() {
+    this.storage.setItem('isSidebarOpen', true);
   }
 }

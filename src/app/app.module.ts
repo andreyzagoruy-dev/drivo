@@ -16,6 +16,7 @@ import { AddTripComponent } from './views/add-trip/add-trip.component';
 import { InputListenerDirective } from './directives/input-listener.directive';
 import { CarsComponent } from './views/cars/cars.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { SidebarComponent } from './views/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     SignUpComponent,
     InputListenerDirective,
     CarsComponent,
-    LoaderComponent
+    LoaderComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

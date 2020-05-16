@@ -1,0 +1,45 @@
+.sidebar__overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--overlay-color);
+}
+
+.sidebar__content {
+  width: 300px;
+  background-color: #FFF;
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, .05);
+  border-right: 1px solid var(--border-color);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.main-nav {
+  padding: 1rem;
+}
+
+.main-nav__content {
+  list-style: none;
+}
+
+.main-nav__item {
+  cursor: pointer;
+}
+
+.main-nav__link {
+  padding: 1rem 0;
+  display: inline-block;
+  width: 100%;
+  color: var(--text-primary-color);
+  text-decoration: none;
+}
+
+.main-nav__link--active {
+  color: var(--primary-default-color);
+  border-bottom: 1px solid var(--primary-default-color);
+}
+
