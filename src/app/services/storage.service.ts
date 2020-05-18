@@ -8,7 +8,8 @@ import { Storage } from '@models/storage';
 export class StorageService {
   private storage: Storage = {
     isLoading: new BehaviorSubject(false),
-    userProfile: new BehaviorSubject(null)
+    userProfile: new BehaviorSubject(null),
+    isSidebarOpen: new BehaviorSubject(false),
   }
 
   public setItem<T extends keyof Storage>(
