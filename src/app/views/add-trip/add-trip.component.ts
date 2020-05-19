@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '@services/api.service';
+import { StorageService } from '@app/services/storage.service';
 import { Trip } from '@app/models/trip';
 import { Car } from '@app/models/car';
 import { User } from '@app/models/user';
@@ -26,7 +27,8 @@ export class AddTripComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private api: ApiService
+    private api: ApiService,
+    private storage: StorageService
   ) {}
 
   ngOnInit() {
@@ -35,8 +37,8 @@ export class AddTripComponent implements OnInit {
 
   public addTrip(): void {
     this.api.addTrip(this.trip)
-      .subscribe((response) => {
-        console.log('Trip:', response);
+      .subscribe((createdTrip) => {
+        this.storage.setItem('activeTrip', createdTrip);
         this.router.navigate(['/trips']);
       });
   }

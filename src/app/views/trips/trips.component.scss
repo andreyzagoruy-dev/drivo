@@ -12,6 +12,11 @@
     overflow: hidden;
 }
 
+.trip--active {
+    min-width: 60vw;
+    margin: 0;
+    padding-right: 55%;
+}
 
 .trip__header {
     width: 100%;
@@ -28,8 +33,19 @@
     border-bottom: 1px solid var(--border-color);
 }
 
+.trip--active .trip__map {
+    position: absolute;
+    left: 45%;
+    border: none;
+    border-left: 1px solid var(--border-color);
+}
+
 .trip__content {
     padding: 1.875rem;
+}
+
+.trip--active .trip__content {
+    padding: 2rem;
 }
 
 .trip__description {
@@ -45,11 +61,16 @@
     padding-top: .875rem;
 }
 
+.trip--active .trip__description + .trip__description {
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
 .trip__description-label {
     color: var(--text-secondary-color);
 }
 
-.trip__subscribe {
+.trip__button {
     margin-top: 2rem;
     width: 100%;
 }

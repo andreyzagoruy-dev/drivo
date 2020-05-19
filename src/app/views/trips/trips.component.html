@@ -1,47 +1,97 @@
 <div class="trips">
-    <div class="card trip" *ngFor="let trip of trips">
-        <div class="trip__header">
-            <app-map class="trip__map" [route]="trip.route" [markers]="trip.waypoints || []" [home]="user.homeLocation"></app-map>
+    <ng-container *ngIf="!activeTrip">
+        <div class="card trip" *ngFor="let trip of trips">
+            <div class="trip__header">
+                <app-map class="trip__map" [route]="trip.route" [markers]="trip.waypoints || []" [home]="user.homeLocation"></app-map>
+            </div>
+            <div class="card__content trip__content">
+                <div class="trip__description">
+                    <span class="trip__description-label">
+                        Car model:
+                    </span>
+                    <span class="trip__description-value">
+                        {{trip.car.model}}
+                    </span>
+                </div>
+                <div class="trip__description">
+                    <span class="trip__description-label">
+                        Car license:
+                    </span>
+                    <span class="trip__description-value">
+                        {{trip.car.license}}
+                    </span>
+                </div>
+                <div class="trip__description">
+                    <span class="trip__description-label">
+                        Seats left:
+                    </span>
+                    <span class="trip__description-value">
+                        {{trip.seatsLeft}} of {{trip.seatsTotal}}
+                    </span>
+                </div>
+                <div class="trip__description">
+                    <span class="trip__description-label">
+                        Departure:
+                    </span>
+                    <span class="trip__description-value">
+                        {{getTime(trip.departureTime)}}
+                    </span>
+                </div>
+                <button
+                    class="button button--secondary trip__button"
+                    (click)="subscribeToTrip(trip)"
+                >
+                    Subscribe
+                </button>
+            </div>
         </div>
-        <div class="card__content trip__content">
-            <div class="trip__description">
-                <span class="trip__description-label">
-                    Car model:
-                </span>
-                <span class="trip__description-value">
-                    {{trip.car.model}}
-                </span>
+    </ng-container>
+    <ng-container *ngIf="activeTrip">
+        <div class="card trip trip--active">
+            <div class="card__header">
+                <h1>Your trip</h1>
             </div>
-            <div class="trip__description">
-                <span class="trip__description-label">
-                    Car license:
-                </span>
-                <span class="trip__description-value">
-                    {{trip.car.license}}
-                </span>
+            <div class="card__content trip__content">
+                <div class="trip__description">
+                    <span class="trip__description-label">
+                        Car model:
+                    </span>
+                    <span class="trip__description-value">
+                        {{activeTrip.car.model}}
+                    </span>
+                </div>
+                <div class="trip__description">
+                    <span class="trip__description-label">
+                        Car license:
+                    </span>
+                    <span class="trip__description-value">
+                        {{activeTrip.car.license}}
+                    </span>
+                </div>
+                <div class="trip__description">
+                    <span class="trip__description-label">
+                        Passengers:
+                    </span>
+                    <span class="trip__description-value">
+                        {{activeTrip.seatsTotal - activeTrip.seatsLeft}}
+                    </span>
+                </div>
+                <div class="trip__description">
+                    <span class="trip__description-label">
+                        Departure:
+                    </span>
+                    <span class="trip__description-value">
+                        {{getTime(activeTrip.departureTime)}}
+                    </span>
+                </div>
+                <button
+                    class="button button--danger trip__button"
+                    (click)="isTripOwner(activeTrip) ? deleteTrip(activeTrip) : unsubscribeFromTrip(activeTrip)"
+                >
+                    {{isTripOwner(activeTrip) ? 'Cancel trip' : 'Unsubscribe'}}
+                </button>
             </div>
-            <div class="trip__description">
-                <span class="trip__description-label">
-                    Seats left:
-                </span>
-                <span class="trip__description-value">
-                    {{trip.seatsLeft}} of {{trip.seatsTotal}}
-                </span>
-            </div>
-            <div class="trip__description">
-                <span class="trip__description-label">
-                    Departure:
-                </span>
-                <span class="trip__description-value">
-                    {{getTime(trip.departureTime)}}
-                </span>
-            </div>
-            <button
-                class="button button--secondary trip__subscribe"
-                (click)="subscribeToTrip(trip)"
-            >
-                Subscribe
-            </button>
+            <app-map class="trip__map" [route]="activeTrip.route"></app-map>
         </div>
-    </div>
+    </ng-container>
 </div>

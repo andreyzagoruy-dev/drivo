@@ -45,7 +45,7 @@ export class PlacesSuggestComponent implements AfterContentInit {
     return `${street ? street + ',' : ''}
             ${houseNumber ? houseNumber + ',' : ''}
             ${city ? city + ',' : ''}
-            ${countryName ? countryName + ',' : ''}`
+            ${countryName}`
       .replace(/\n(\s+)/gm, ' ');
   }
 }
