@@ -1,29 +1,7 @@
 
-<header *ngIf="isLoggedIn" class="main-header">
-    <div class="main-header__left">
-        <button
-            class="button main-header__menu-button"
-            (click)="toggleSidebar()"
-        >
-            <svg class="main-header__menu-icon icon icon--white">
-                <use xlink:href="./assets/icons.svg#menu"></use>
-            </svg>
-        </button>
-    </div>
-    <span class="main-header__date">
-        {{today}}
-    </span>
-    <div class="main-header__right h-hide--mobile">
-        <button
-            class="button button--accent main-header__trip-button"
-            routerLink="/trips/add"
-        >
-            Create trip
-        </button>
-    </div>
-</header>
+<app-header *ngIf="isLoggedIn"></app-header>
+<app-sidebar></app-sidebar>
 <main class="views">
-    <app-sidebar class="sidebar"></app-sidebar>
     <router-outlet></router-outlet>
-    <app-loader></app-loader>
 </main>
+<app-loader></app-loader>

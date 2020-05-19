@@ -1,0 +1,25 @@
+<header class="main-header">
+    <div class="main-header__left">
+        <button
+            class="button main-header__menu-button"
+            (click)="openSidebar()"
+        >
+            <svg class="main-header__menu-icon icon icon--white">
+                <use xlink:href="./assets/icons.svg#menu"></use>
+            </svg>
+        </button>
+    </div>
+    <span class="main-header__date">
+        {{today}}
+    </span>
+    <div class="main-header__right h-hide--mobile">
+        <button
+            class="button main-header__trip-button"
+            routerLink="/trips/add"
+            [ngClass]="isCreateTripAllowed ? 'button--accent' : 'button--disabled'"
+            [disabled]="!isCreateTripAllowed"
+        >
+            Create trip
+        </button>
+    </div>
+</header>

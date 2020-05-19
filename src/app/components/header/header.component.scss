@@ -1,0 +1,37 @@
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFF;
+    box-shadow: 0 0 2rem var(--highlight-color);
+    padding: .875rem 1rem;
+}
+
+.main-header__left, .main-header__right {
+    width: 20%;
+}
+
+.main-header__right {
+     text-align: right;
+}
+
+.main-header__date {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: .1rem;
+}
+
+.main-header__menu-button {
+    padding: 0;
+    margin-right: 4rem;
+}
+
+.main-header__menu-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: #594e78;
+}
+
+.main-header__trip-button {
+    padding: .625rem 1.5rem;
+}

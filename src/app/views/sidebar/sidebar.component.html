@@ -1,48 +1,48 @@
-<div *ngIf="isOpen">
-        <div
-            class="sidebar__overlay"
-            (click)="toggleSidebar()"
-        ></div>
-        <div class="sidebar__content">
-            <nav class="main-nav">
-                <ul class="main-nav__content">
-                    <li class="main-nav__item">
-                        <a
-                            class="main-nav__link"
-                            routerLink="/profile"
-                            routerLinkActive="main-nav__link--active"
-                        >
-                            Profile
-                        </a>
-                    </li>
-                    <li class="main-nav__item">
-                        <a
-                            class="main-nav__link"
-                            routerLink="/cars"
-                            routerLinkActive="main-nav__link--active"
-                        >
-                            Cars
-                        </a>
-                    </li>
-                    <li class="main-nav__item">
-                        <a
-                            class="main-nav__link"
-                            routerLink="/trips"
-                            routerLinkActive="main-nav__link--active"
-                        >
-                            Trips
-                        </a>
-                    </li>
-                    <li class="main-nav__item">
-                        <a
-                            class="main-nav__link"
-                            (click)="logout()"
-                        >
-                            Logout
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+<div *ngIf="isOpen" class="sidebar">
+    <div
+        class="sidebar__overlay"
+        (click)="closeSidebar()"
+    ></div>
+    <div class="sidebar__content">
+        <nav class="main-nav">
+            <ul class="main-nav__content">
+                <li class="main-nav__item">
+                    <a
+                        class="main-nav__link"
+                        routerLink="/profile"
+                        routerLinkActive="main-nav__link--active"
+                    >
+                        Profile
+                    </a>
+                </li>
+                <li class="main-nav__item">
+                    <a
+                        class="main-nav__link"
+                        routerLink="/cars"
+                        routerLinkActive="main-nav__link--active"
+                    >
+                        Cars
+                    </a>
+                </li>
+                <li class="main-nav__item">
+                    <a
+                        class="main-nav__link"
+                        routerLink="/trips"
+                        routerLinkActive="main-nav__link--active"
+                    >
+                        Trips
+                    </a>
+                </li>
+                <li class="main-nav__item">
+                    <a
+                        class="main-nav__link"
+                        (click)="logout()"
+                    >
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
+</div>
 

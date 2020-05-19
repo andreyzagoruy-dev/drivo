@@ -8,7 +8,7 @@ import { AuthService } from '@app/services/auth.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  private isOpen = false;
+  public isOpen = false;
 
   constructor(
     private storage: StorageService,
@@ -17,12 +17,12 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.storage.getItem('isSidebarOpen')
-    .subscribe((statusOfSidebar) => {
-      this.isOpen = statusOfSidebar
-    })
+      .subscribe((sidebarStatus) => {
+        this.isOpen = sidebarStatus;
+      });
   }
 
-  toggleSidebar() {
+  public closeSidebar(): void {
     this.storage.setItem('isSidebarOpen', false);
   }
 

@@ -17,6 +17,7 @@ import { InputListenerDirective } from './directives/input-listener.directive';
 import { CarsComponent } from './views/cars/cars.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { SidebarComponent } from './views/sidebar/sidebar.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SidebarComponent } from './views/sidebar/sidebar.component';
     InputListenerDirective,
     CarsComponent,
     LoaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
