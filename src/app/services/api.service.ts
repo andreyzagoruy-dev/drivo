@@ -56,11 +56,17 @@ export class ApiService {
   }
 
   public tripSubscribe(tripId: number, passanger: Passanger): Observable<Trip> {
-    return this.http.post<Trip>(`${API_BASE_URL}/trips/${tripId}/subscribe`, passanger);
+    return this.http.post<Trip>(`${API_BASE_URL}/trips/${tripId}/subscribe`, passanger)
+      .pipe(
+        map((trip) => {
+          trip.departureTime = new Date(trip.departureTime);
+          return trip;
+        })
+      );
   }
 
-  public tripUnsubscribe(tripId: number, passangerId: number): Observable<void> {
-    return this.http.post<void>(`${API_BASE_URL}/trips/${tripId}/unsubscribe`, { passangerId });
+  public tripUnsubscribe(trip: Trip, userId: number): Observable<void> {
+    return this.http.post<void>(`${API_BASE_URL}/trips/${trip.id}/unsubscribe`, { id: userId });
   }
 
   public getActiveTrip(userId: number): Observable<Trip> {

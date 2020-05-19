@@ -49,7 +49,7 @@ export class TripsComponent implements OnInit, OnDestroy {
   }
 
   public unsubscribeFromTrip(trip: Trip): void {
-    this.api.tripUnsubscribe(trip.id, this.user.id)
+    this.api.tripUnsubscribe(trip, this.user.id)
       .subscribe(() => {
         this.storage.setItem('activeTrip', null);
       });
