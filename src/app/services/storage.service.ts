@@ -23,4 +23,10 @@ export class StorageService {
   public getItem<T extends keyof Storage>(itemName: T): Storage[T] {
     return this.storage[itemName];
   }
+
+  public clearStorage(): void {
+    for (const key in this.storage) {
+      this.storage[key].next(null);
+    }
+  }
 }
