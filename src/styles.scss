@@ -2,4 +2,187 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  --primary-default-color: #003EFF;
+  --primary-accent-color: #00FB98;
+  --secondary-color: #432C85;
+  --disabled-color: #D3D3D3;
+  --danger-color: #DC143C;
+  --text-primary-color: #182F19;
+  --text-secondary-color: #8087AE;
+  --link-color: #FF3A82;
+  --border-color: #F6F6F6;
+  --highlight-color: rgba(0, 0, 255, .1);
+  --input-shadow-color: rgba(0, 0, 255, .3);
+  --input-invalid-shadow-color: rgba(255, 0, 128, .3);
+  --overlay-color: rgba(12, 16, 102, .3);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--text-primary-color);
+}
+
+.button {
+  text-transform: uppercase;
+  appearance: none;
+  background: none;
+  border: none;
+  color: #FFF;
+  text-shadow: 0 0 4px var(--highlight-color);
+  outline: none;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 3rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button--accent {
+  background-color: var(--primary-accent-color);
+}
+
+.button--secondary {
+  background-color: var(--secondary-color);
+}
+
+.button--danger {
+  background-color: var(--danger-color);
+}
+
+.button--disabled {
+  background-color: var(--disabled-color);
+}
+
+.link {
+  color: var(--link-color);
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.icon--white {
+  fill: #FFF;
+}
+
+.card {
+  position: relative;
+  background-color: #FFF;
+  border-radius: 1rem;
+  box-shadow: 0 0 1.25rem var(--highlight-color);
+  transform: translateZ(0); // Needed for Safari to correctly overflow with "border-radius" over "leaflet" map
+}
+
+.card__header {
+  text-align: center;
+  padding: 2rem 2rem 0;
+}
+
+.card__header--borderless {
+  padding: 0;
+}
+
+.card__content {
+  padding: 2rem;
+}
+
+.form {
+  text-align: center;
+  padding: 1rem;
+}
+
+.form__group + .form__group {
+  margin-top: 2rem;
+}
+
+.form__input {
+  appearance: none;
+  outline: none;
+  border: none;
+  min-width: 220px;
+  font-size: 1rem;
+  padding: 1.125rem 1.5rem;
+  border-radius: 1.75rem;
+  box-shadow: 0 0 2rem var(--input-shadow-color);
+}
+
+.form__input:focus {
+  border: 1px solid var(--input-shadow-color);
+  padding: calc(1.125rem - 1px) calc(1.5rem - 1px);
+}
+
+.form__field {
+  position: relative;
+}
+
+.form__field--icon .form__input {
+  padding-right: 2.5rem;
+}
+
+.form__field--icon::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: .875rem;
+  width: 1rem;
+  height: 1rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: 50% 50%;
+}
+
+.form__field--icon-arrow-down::after {
+  mask-image: url("/assets/icons.svg#arrow-down");
+}
+
+.form__field--icon-house::after {
+  mask-image: url("/assets/icons.svg#house");
+}
+
+.form__field--icon-work::after {
+  mask-image: url("/assets/icons.svg#work");
+}
+
+.form__field--icon-color-accent::after {
+  background-color: var(--primary-accent-color);
+}
+
+.form__field--icon-color-secondary::after {
+  background-color: var(--secondary-color);
+}
+
+.form__input--invalid {
+  box-shadow: 0 0 2rem var(--input-invalid-shadow-color);
+}
+
+.form__error {
+  
+}
+
+.form__button {
+  margin-top: 1rem;
+  padding: 1.125rem 3rem;
+}
+
+/*
+  Helper classes
+*/
+
+.h-mt--sm {
+  margin-top: 1rem;
+}
+
+.h-text--center {
+  text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+  .h-hide--mobile {
+    display: none;
+  }
 }

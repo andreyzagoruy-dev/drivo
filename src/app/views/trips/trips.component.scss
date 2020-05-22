@@ -1,11 +1,76 @@
-.card {
-    width: 320px;
-    border-radius: .5rem;
-    box-shadow: 0 0 2px 2px rgba($color: #000000, $alpha: .3);
+.trips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.trip {
+    min-width: 320px;
+    border-radius: 2rem;
+    margin: 2rem;
     overflow: hidden;
 }
 
-.map {
+.trip--active {
+    min-width: 60vw;
+    margin: 0;
+    padding-right: 55%;
+}
+
+.trip__header {
     width: 100%;
-    height: 280px;
+    padding-bottom: 80%;
+    position: relative;
+}
+
+.trip__map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.trip--active .trip__map {
+    position: absolute;
+    left: 45%;
+    border: none;
+    border-left: 1px solid var(--border-color);
+}
+
+.trip__content {
+    padding: 1.875rem;
+}
+
+.trip--active .trip__content {
+    padding: 2rem;
+}
+
+.trip__description {
+    text-transform: uppercase;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.trip__description + .trip__description {
+    border-top: 1px solid var(--border-color);
+    margin-top: .875rem;
+    padding-top: .875rem;
+}
+
+.trip--active .trip__description + .trip__description {
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.trip__description-label {
+    color: var(--text-secondary-color);
+}
+
+.trip__button {
+    margin-top: 2rem;
+    width: 100%;
 }

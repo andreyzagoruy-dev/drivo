@@ -7,7 +7,10 @@ import { Storage } from '@models/storage';
 })
 export class StorageService {
   private storage: Storage = {
-    userProfile: new BehaviorSubject(null)
+    isLoading: new BehaviorSubject(false),
+    isSidebarOpen: new BehaviorSubject(false),
+    userProfile: new BehaviorSubject(null),
+    activeTrip: new BehaviorSubject(null)
   }
 
   public setItem<T extends keyof Storage>(
@@ -19,5 +22,11 @@ export class StorageService {
 
   public getItem<T extends keyof Storage>(itemName: T): Storage[T] {
     return this.storage[itemName];
+  }
+
+  public clearStorage(): void {
+    for (const key in this.storage) {
+      this.storage[key].next(null);
+    }
   }
 }

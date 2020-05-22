@@ -1,4 +1,61 @@
-
-<div style="width: 100%; height: 400px;">
-    <app-map [route]="tripRoute"></app-map>
+<div class="card trip">
+    <div class="card__header">
+        <h1>Your trip</h1>
+    </div>
+    <div class="card__content">
+        <form
+            #addTripForm="ngForm"
+            class="form"
+            (ngSubmit)="addTrip()"
+        >
+            <div class="form__group">
+                <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
+                    <select
+                        class="form__input"
+                        name="car"
+                        id="car"
+                        required
+                        [(ngModel)]="trip.car"
+                    >
+                        <option value="null">Select car</option>
+                        <option *ngFor="let car of cars" [ngValue]="car">
+                            {{car.model}}({{car.license}})
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form__group">
+                <input
+                    class="form__input"
+                    placeholder="Seats number"
+                    type="text"
+                    id="seatsTotal"
+                    name="seatsTotal"
+                    required
+                    [(ngModel)]="trip.seatsTotal"
+                >
+            </div>
+            <div class="form__group">
+                <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
+                    <select class="form__input" name="date" id="date" required [(ngModel)]="trip.departureTime">
+                        <option value="null">Departure time</option>
+                        <option *ngFor="let date of dates" [ngValue]="date" >
+                            {{date.getHours()}}:00
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form__group">
+                <button
+                    class="button form__button"
+                    type="submit"
+                    [ngClass]="addTripForm.form.valid ? 'button--secondary' : 'button--disabled'"
+                    [disabled]="!addTripForm.form.valid"
+                >
+                    Create
+                </button>
+            </div>
+        </form>
+    </div>
+    <app-map class="trip__map" [trip]="trip"></app-map>
 </div>

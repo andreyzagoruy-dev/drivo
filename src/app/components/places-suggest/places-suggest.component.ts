@@ -1,52 +1,51 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, EventEmitter, Output, ContentChild, AfterContentInit } from '@angular/core';
 import { PlacesGeocodeService } from '@services/places-geocode.service';
-import { debounceTime, filter } from 'rxjs/operators';
+import { debounceTime, filter, switchMap } from 'rxjs/operators';
+import { InputListenerDirective } from '@directives/input-listener.directive';
+import { HereMapsPlace } from '@models/map';
 
 @Component({
   selector: 'app-places-suggest',
   templateUrl: './places-suggest.component.html',
   styleUrls: ['./places-suggest.component.scss']
 })
-export class PlacesSuggestComponent implements OnInit {
-  public address = '';
+export class PlacesSuggestComponent implements AfterContentInit {
+  public isShowSuggestions = false;
+  public suggestedPlaces: HereMapsPlace[] = [];
 
-  public searchQuery = new FormControl('');
-
-  public suggestedPlaces = [];
-
-  @Output() addLocation = new EventEmitter<any>();
+  @ContentChild(InputListenerDirective, { static: false }) input: InputListenerDirective;
+  @Output() addLocation = new EventEmitter<HereMapsPlace>();
 
   constructor(private placesGeocode: PlacesGeocodeService) { }
 
-  ngOnInit() {
-    this.searchQuery.valueChanges
+  ngAfterContentInit() {
+    this.input.changes
       .pipe(
-        filter((place) => place.length),
-        debounceTime(1500)
+        filter((inputValue) => !!inputValue.length),
+        debounceTime(1500),
+        switchMap((inputValue) => this.placesGeocode.suggest(inputValue))
       )
-      .subscribe((address) => {
-        this.placesGeocode.suggest(address).subscribe((places: any) => {
-          this.suggestedPlaces = places.items;
-        });
+      .subscribe((places) => {
+        this.suggestedPlaces = places.items;
+        this.isShowSuggestions = !!places.items.length && this.input.focus.getValue();
+      });
+
+    this.input.focus
+      .subscribe((focusState) => {
+        this.isShowSuggestions = focusState && this.suggestedPlaces.length !== 0;
       });
   }
 
-  setPlace(place: any) {
-    this.showAddress(place.title);
-    this.addLocation.emit(place.position);
+  public setPlace(place: HereMapsPlace): void {
+    this.addLocation.emit({ ...place, prettyAddress: this.getPrettyAddress(place) });
   }
 
-
-  showAddress(place: string): boolean {
-    if (place.length !== 0) {
-      this.address = place;
-      return true;
-    }
-    return false;
-  }
-
-  cleanAddress(): void {
-    this.address = '';
+  public getPrettyAddress(place: HereMapsPlace): string {
+    const { street, houseNumber, city, countryName } = place.address;
+    return `${street ? street + ',' : ''}
+            ${houseNumber ? houseNumber + ',' : ''}
+            ${city ? city + ',' : ''}
+            ${countryName}`
+      .replace(/\n(\s+)/gm, ' ');
   }
 }

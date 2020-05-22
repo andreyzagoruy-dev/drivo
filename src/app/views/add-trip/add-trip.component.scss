@@ -1,0 +1,18 @@
+.trip {
+    min-width: 60vw;
+    padding-right: 60%;
+    overflow: hidden;
+}
+
+.trip__map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 40%;
+    right: 0;
+    border-left: 1px solid var(--border-color);
+}
+
+.form__input {
+    width: 100%;
+}

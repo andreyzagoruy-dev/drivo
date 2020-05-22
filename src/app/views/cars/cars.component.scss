@@ -1,0 +1,39 @@
+.cars {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.car {
+    min-width: 320px;
+    border-radius: 2rem;
+    margin: 2rem;
+    overflow: hidden;
+}
+
+.car__content {
+    padding: 1.875rem;
+}
+
+.car__description {
+    text-transform: uppercase;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.car__description + .car__description {
+    border-top: 1px solid var(--border-color);
+    margin-top: .875rem;
+    padding-top: .875rem;
+}
+
+.car__description-label {
+    color: var(--text-secondary-color);
+}
+
+.car__button {
+    margin-top: 2rem;
+    width: 100%;
+}

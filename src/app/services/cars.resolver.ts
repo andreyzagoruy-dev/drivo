@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve } from '@angular/router';
 import { EMPTY } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { tap, first } from 'rxjs/operators';
 import { StorageService } from '@services/storage.service';
 import { ApiService } from '@services/api.service';
-import { LatLng } from '@models/map';
 import { User } from '@models/user';
+import { Car } from '@app/models/car';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TripRouteResolver implements Resolve<LatLng[]> {
+export class CarsResolver implements Resolve<Car[]> {
   constructor(
     private router: Router,
     private api: ApiService,
@@ -25,12 +25,12 @@ export class TripRouteResolver implements Resolve<LatLng[]> {
       return EMPTY;
     }
 
-    const {
-      homeLocation,
-      workLocation
-    } = userProfile;
-
-    return this.api.getRoute(homeLocation, workLocation).pipe(
+    return this.api.getCars(userProfile.id).pipe(
+      tap((carsFromServer) => {
+        if (carsFromServer.length === 0) {
+          this.router.navigate(['cars']);
+        }
+      }),
       first()
     );
   }
