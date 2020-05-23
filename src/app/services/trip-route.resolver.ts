@@ -26,13 +26,11 @@ export class TripRouteResolver implements Resolve<LatLng[]> {
     }
 
     const {
-      homeLatitude,
-      homeLongitude,
-      workLatitude,
-      workLongitude
+      homeLocation,
+      workLocation
     } = userProfile;
 
-    return this.api.getRoute([homeLatitude, homeLongitude], [workLatitude, workLongitude]).pipe(
+    return this.api.getRoute(homeLocation, workLocation).pipe(
       first()
     );
   }

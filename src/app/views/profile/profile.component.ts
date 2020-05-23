@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '@services/api.service';
 import { StorageService } from '@services/storage.service';
 import { User } from '@models/user';
+import { HereMapsPlace } from '@models/map';
 
 @Component({
   selector: 'app-profile',
@@ -15,26 +16,33 @@ export class ProfileComponent implements OnInit {
   constructor(
     private api: ApiService,
     private storage: StorageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.user = this.route.snapshot.data.userProfile;
   }
 
-  workLocation(location) {
-    this.user.workLatitude = location.lat;
-    this.user.workLongitude = location.lng;
+  public setLocation(type: 'work' | 'home', place: HereMapsPlace): void {
+    const { prettyAddress, position: { lat, lng } } = place;
+    this.user[`${type}Address`] = prettyAddress;
+    this.user[`${type}Location`] = [lat, lng];
   }
 
-  homeLocation(location) {
-    this.user.homeLatitude = location.lat;
-    this.user.homeLongitude = location.lng;
+  public isProfileFormValid(): boolean {
+    const { fullname, homeLocation, workLocation } = this.user;
+    const isHomeLocation = !!homeLocation.filter((coordinate) => coordinate !== 0).length;
+    const isWorkLocation = !!workLocation.filter((coordinate) => coordinate !== 0).length;
+
+    return fullname && isHomeLocation && isWorkLocation;
   }
 
-  onSubmit() {
-    this.api.updateProfile(this.user, this.user.id).subscribe((data) => {
-      this.storage.setItem('userProfile', this.user);
-    });
+  public onSubmit(): void {
+    this.api.updateProfile(this.user, this.user.id)
+      .subscribe((userFromServer) => {
+        this.storage.setItem('userProfile', userFromServer);
+        this.router.navigate(['/trips']);
+      });
   }
 }

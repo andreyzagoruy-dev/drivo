@@ -1,21 +1,63 @@
-<h2>Розкажи про себе</h2>
-<form class="form" (ngSubmit)="onSubmit()" #profileForm="ngForm">
-  <label class="form__input">
-    Ім'я:
-    <input type="text" [(ngModel)]="user.fullname" name="fullname" required>
-  </label>
-  <label class="form__input">
-    Адреса роботи:
-    <app-places-suggest (addLocation)="workLocation($event)"></app-places-suggest>
-  </label>
-  <label class="form__input">
-    Домашня адреса:
-    <app-places-suggest (addLocation)="homeLocation($event)"></app-places-suggest>
-  </label>
-
-  <button class="form__button" type="submit" [disabled]="!profileForm.valid">Зберегти</button>
-</form>
-
-<p>
-  Form Value: {{ user | json }}
-</p>
+<div class="card">
+  <div class="card__header">
+    <h1>Profile</h1>
+  </div>
+  <div class="card__content">
+    <form
+      class="form"
+      #profileForm="ngForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="form__group">
+        <input
+          class="form__input"
+          type="text"
+          name="fullname"
+          placeholder="Full name"
+          required
+          [(ngModel)]="user.fullname"
+        >
+      </div>
+      <div class="form__group">
+        <app-places-suggest (addLocation)="setLocation('home', $event)">
+          <div
+            class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-house"
+          >
+            <input
+              inputListener
+              class="form__input"
+              placeholder="Home address"
+              type="text"
+              [value]="user.homeAddress"
+            >
+          </div>
+        </app-places-suggest>
+      </div>
+      <div class="form__group">
+        <app-places-suggest (addLocation)="setLocation('work', $event)">
+          <div
+            class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-work"
+          >
+            <input
+              inputListener
+              class="form__input"
+              placeholder="Work address"
+              type="text"
+              [value]="user.workAddress"
+            >
+          </div>
+        </app-places-suggest>
+      </div>
+      <div class="form__group">
+        <button
+          class="button form__button"
+          type="submit"
+          [ngClass]="isProfileFormValid() ? 'button--accent' : 'button--disabled'"
+          [disabled]="!isProfileFormValid()"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

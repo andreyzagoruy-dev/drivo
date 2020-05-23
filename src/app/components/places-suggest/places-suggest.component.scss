@@ -1,8 +1,27 @@
-.item:hover {
-  color: #3b2e83;
+.autocomplete {
+  position: relative;
 }
 
-.item:active  {
-  color: #24157a;
-  font-weight: 800;
+.autocomplete__suggestions {
+  position: absolute;
+  top: calc(100% + 1rem);
+  left: 0;
+  right: 0;
+}
+
+.suggestions {
+  z-index: 1;
+  padding: .125rem 1rem;
+}
+
+.suggestions__item {
+  list-style: none;
+  text-align: left;
+  padding: .75rem 0;
+  line-height: 1.5rem;
+  cursor: pointer;
+}
+
+.suggestions__item + .suggestions__item {
+  border-top: 1px solid var(--border-color);
 }

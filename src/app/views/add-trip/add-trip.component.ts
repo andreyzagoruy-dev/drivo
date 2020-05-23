@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { LatLng } from '@app/models/map';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '@services/api.service';
+import { StorageService } from '@app/services/storage.service';
+import { Trip } from '@app/models/trip';
+import { Car } from '@app/models/car';
+import { User } from '@app/models/user';
 
 @Component({
   selector: 'app-add-trip',
@@ -8,13 +12,46 @@ import { LatLng } from '@app/models/map';
   styleUrls: ['./add-trip.component.scss']
 })
 export class AddTripComponent implements OnInit {
-  public tripRoute: LatLng[] = [];
+  public user: User = this.route.snapshot.data.userProfile;
+  public cars: Car[] = this.route.snapshot.data.cars;
+  public dates: Date[] = [];
+  public trip: Trip = {
+    driverId: this.user.id,
+    departureTime: null,
+    start: this.user.workLocation,
+    seatsTotal: null,
+    car: null,
+    route: this.route.snapshot.data.tripRoute
+  };
 
   constructor(
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private api: ApiService,
+    private storage: StorageService
+  ) {}
 
   ngOnInit() {
-    this.tripRoute = this.route.snapshot.data.tripRoute;
+    this.generateDates();
+  }
+
+  public addTrip(): void {
+    this.api.addTrip(this.trip)
+      .subscribe((createdTrip) => {
+        this.storage.setItem('activeTrip', createdTrip);
+        this.router.navigate(['/trips']);
+      });
+  }
+
+  private generateDates(): void {
+    const currentDate = new Date();
+    let currentHour = currentDate.getHours();
+
+    while (currentHour !== 24) {
+      currentHour += 1;
+      currentDate.setHours(currentHour);
+      currentDate.setMinutes(0, 0, 0);
+      this.dates.push(new Date(currentDate));
+    }
   }
 }

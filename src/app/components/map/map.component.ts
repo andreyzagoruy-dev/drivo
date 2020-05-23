@@ -1,7 +1,12 @@
 import { Component, OnChanges, Input, ViewChild, OnInit } from '@angular/core';
-import { Map, Marker, Polyline, tileLayer } from 'leaflet';
+import { Map, Marker, Polyline, tileLayer, PolylineOptions, MarkerOptions } from 'leaflet';
+import { environment } from '@environments/environment';
+import { Trip } from '@app/models/trip';
+import { Passanger } from '@app/models/passanger';
 import { LatLng } from '@models/map';
 import { icons } from './icons';
+
+const API_KEY = environment.apiMapsKey;
 
 @Component({
   selector: 'app-map',
@@ -10,11 +15,10 @@ import { icons } from './icons';
 })
 export class MapComponent implements OnInit, OnChanges {
   @ViewChild('mapContainer', { static: true }) mapReference;
-  @Input() markers: LatLng[] = [];
+  @Input() trip: Trip;
   @Input() home: LatLng = null;
-  @Input() route: LatLng[] = [];
 
-  private map;
+  private map: Map;
 
   ngOnInit() {
     this.initMap();
@@ -27,13 +31,20 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   private initMap(): void {
-    this.map = new Map(this.mapReference.nativeElement, {});
+    this.map = new Map(this.mapReference.nativeElement, {
+      attributionControl: false,
+      zoomControl: false,
+      dragging: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      tap: false,
+      touchZoom: false
+    });
   }
 
   private renderMap(): void {
-    const tiles = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    const tiles = tileLayer(`https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/512/png8?apiKey=${API_KEY}&ppi=250`, {
+      maxZoom: 19
     });
 
     tiles.addTo(this.map);
@@ -43,13 +54,27 @@ export class MapComponent implements OnInit, OnChanges {
     this.renderMarkers();
     this.renderHome();
     this.renderPath();
+    this.fitBounds();
   }
 
   private renderMarkers(): void {
-    this.markers.forEach((point: any) => {
-      const marker = this.createMarker(point, 'default');
+    const { passengers, waypoint } = this.trip;
+
+    if (passengers) {
+      passengers.forEach((passenger: Passanger) => {
+        const markerBackground = this.createMarker(passenger.waypoint, 'dot-background', { zIndexOffset: -100 });
+        const marker = this.createMarker(passenger.waypoint, 'dot');
+        markerBackground.addTo(this.map);
+        marker.addTo(this.map);
+      });
+    }
+
+    if (waypoint) {
+      const markerBackground = this.createMarker(waypoint, 'dot-background', { zIndexOffset: -100 });
+      const marker = this.createMarker(waypoint, 'dot');
+      markerBackground.addTo(this.map);
       marker.addTo(this.map);
-    });
+    }
   }
 
   private renderHome(): void {
@@ -59,18 +84,29 @@ export class MapComponent implements OnInit, OnChanges {
     homeMarker.addTo(this.map);
   }
 
-  private createMarker(location, type: string): Marker {
-    type = type.toLowerCase();
-    return new Marker(location, { icon: icons[type] });
+  private createMarker(
+    location: LatLng,
+    type: string,
+    options: MarkerOptions = { zIndexOffset: 600 }
+  ): Marker {
+    Object.assign(options, { icon: icons[type.toLowerCase()] });
+    return new Marker(location, options);
   }
 
   private renderPath(): void {
-    const path = this.createPath(this.route as []);
+    const { route } = this.trip;
+    const outline = this.createPath(route, { color: '#3F7FEF', weight: 8 });
+    const path = this.createPath(route, { color: '#FFF', weight: 6, pane: 'markerPane' });
+    outline.addTo(this.map);
     path.addTo(this.map);
-    this.map.fitBounds(path.getBounds());
   }
 
-  private createPath(waypoints: []): Polyline {
-    return new Polyline(waypoints, { color: 'red' });
+  private fitBounds(): void {
+    const { route } = this.trip;
+    this.map.fitBounds([...route, this.home ? this.home : null], { padding: [64, 64] });
+  }
+
+  private createPath(waypoints: LatLng[], options: PolylineOptions = {}): Polyline {
+    return new Polyline(waypoints, options);
   }
 }

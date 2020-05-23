@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { User } from '@models/user';
 import { environment } from '@environments/environment';
+import { StorageService } from './storage.service';
 
 const API_BASE_URL = environment.apiBaseUrl;
 
@@ -13,7 +14,8 @@ const API_BASE_URL = environment.apiBaseUrl;
 export class AuthService {
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private storage: StorageService
   ) { }
 
   public login(email: string, password: string) {
@@ -30,6 +32,7 @@ export class AuthService {
 
   public logout() {
     this.removeUser();
+    this.storage.clearStorage();
     this.router.navigate(['login']);
   }
 

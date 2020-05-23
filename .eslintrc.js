@@ -27,6 +27,7 @@ module.exports = {
     'import/extensions': 'off',
     'object-curly-newline': ["error", { "ImportDeclaration": "never", "ExportDeclaration": "never" }],
     'no-unused-expressions': ["error", { "allowShortCircuit": true }],
-    'no-undef': 'off'
+    'no-undef': 'off',
+    'prefer-template': 'off'
   }
 };
