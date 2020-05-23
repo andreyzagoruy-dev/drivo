@@ -13,7 +13,7 @@ export class PlacesSuggestComponent implements AfterContentInit {
   public isShowSuggestions = false;
   public suggestedPlaces: HereMapsPlace[] = [];
 
-  @ContentChild(InputListenerDirective, { static: false }) input: InputListenerDirective;
+  @ContentChild(InputListenerDirective) input: InputListenerDirective;
   @Output() addLocation = new EventEmitter<HereMapsPlace>();
 
   constructor(private placesGeocode: PlacesGeocodeService) { }
