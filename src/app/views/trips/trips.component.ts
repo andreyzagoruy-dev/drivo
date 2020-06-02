@@ -5,7 +5,10 @@ import { StorageService } from '@app/services/storage.service';
 import { Subscription } from 'rxjs';
 import { Trip } from '@models/trip';
 import { User } from '@models/user';
+import { HereMapsPlace, LatLng } from '@models/map';
 import { getPrettyTime } from '@app/helpers/date';
+
+const WALK_DISTANCE_IN_METERS_PER_MINUTE = 80;
 
 @Component({
   selector: 'app-trips',
@@ -15,8 +18,17 @@ import { getPrettyTime } from '@app/helpers/date';
 export class TripsComponent implements OnInit, OnDestroy {
   public trips: Trip[];
   public activeTrip: Trip;
-  public user: User;
+  public user: User = this.route.snapshot.data.userProfile;
+
+  public startAddress: string;
+  public startLocation: LatLng;
+  public finishAddress: string;
+  public finishLocation: LatLng;
+  public walkTimeInMinutes = 15;
+  public mapFinishLocation: LatLng;
+
   public getTime = getPrettyTime;
+
   private activeTripSubscription: Subscription;
 
   constructor(
@@ -28,7 +40,14 @@ export class TripsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.user = this.route.snapshot.data.userProfile;
+    const { homeAddress, homeLocation, workAddress, workLocation } = this.user;
+
+    this.startAddress = workAddress;
+    this.startLocation = workLocation;
+    this.finishAddress = homeAddress;
+    this.finishLocation = homeLocation;
+    this.mapFinishLocation = homeLocation;
+
     this.activeTripSubscription = this.storage.getItem('activeTrip')
       .subscribe(this.onActiveTripChange);
   }
@@ -62,18 +81,36 @@ export class TripsComponent implements OnInit, OnDestroy {
       });
   }
 
+  public setLocation(type: 'start' | 'finish', place: HereMapsPlace): void {
+    const { prettyAddress, position: { lat, lng } } = place;
+    this[`${type}Address`] = prettyAddress;
+    this[`${type}Location`] = [lat, lng];
+  }
+
+  public isSearchFormValid(): boolean {
+    const { startLocation, finishLocation } = this;
+    const isStartLocation = !!startLocation.filter((coordinate) => coordinate !== 0).length;
+    const isFinishLocation = !!finishLocation.filter((coordinate) => coordinate !== 0).length;
+
+    return isStartLocation && isFinishLocation;
+  }
+
+  public fetchTrips(): void {
+    const distance = this.walkTimeInMinutes * WALK_DISTANCE_IN_METERS_PER_MINUTE;
+
+    this.api.getSuggestedTrips(this.startLocation, this.finishLocation, distance)
+      .subscribe((tripsFromServer) => {
+        this.trips = tripsFromServer;
+      });
+
+    this.mapFinishLocation = [this.finishLocation[0], this.finishLocation[1]];
+  }
+
   private onActiveTripChange(incomingTrip: Trip): void {
     this.activeTrip = incomingTrip;
 
     if (!this.activeTrip) {
       this.fetchTrips();
     }
-  }
-
-  private fetchTrips(): void {
-    this.api.getSuggestedTrips(this.user.workLocation, this.user.homeLocation)
-      .subscribe((tripsFromServer) => {
-        this.trips = tripsFromServer;
-      });
   }
 }

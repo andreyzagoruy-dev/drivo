@@ -1,8 +1,78 @@
 <div class="trips">
     <ng-container *ngIf="!activeTrip">
+        <div class="card search">
+            <div class="card__header">
+                <h1 class="card__heading">
+                    Search
+                </h1>
+            </div>
+            <div class="card__content">
+                <form
+                    class="form"
+                    #searchForm="ngForm"
+                    autocomplete="off"
+                    (ngSubmit)="fetchTrips()"
+                >
+                    <div class="form__group">
+                        <app-places-suggest (addLocation)="setLocation('start', $event)">
+                            <label class="form__label" for="start">Start</label>
+                            <input
+                                inputListener
+                                id="start"
+                                class="form__input"
+                                placeholder="Street, City, Country"
+                                type="text"
+                                name="start"
+                                [value]="startAddress"
+                            >
+                        </app-places-suggest>
+                    </div>
+                    <div class="form__group">
+                        <app-places-suggest (addLocation)="setLocation('finish', $event)">
+                            <label class="form__label" for="finish">Destination</label>
+                            <input
+                                inputListener
+                                id="finish"
+                                class="form__input"
+                                placeholder="Street, City, Country"
+                                type="text"
+                                name="finish"
+                                [value]="finishAddress"
+                            >
+                        </app-places-suggest>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="distance">Walk time</label>
+                        <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
+                            <select
+                                class="form__input"
+                                name="distance"
+                                id="distance"
+                                required
+                                [(ngModel)]="walkTimeInMinutes"
+                            >
+                                <option value="5">5 minutes</option>
+                                <option value="10">10 minutes</option>
+                                <option value="15">15 minutes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form__group">
+                        <button
+                            class="button form__button search__button"
+                            type="submit"
+                            [ngClass]="isSearchFormValid() ? 'button--accent' : 'button--disabled'"
+                            [disabled]="!isSearchFormValid()"
+                        >
+                            Find trips
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="card trip" *ngFor="let trip of trips">
             <div class="trip__header">
-                <app-map class="trip__map" [trip]="trip" [home]="user.homeLocation"></app-map>
+                <app-map class="trip__map" [trip]="trip" [home]="mapFinishLocation"></app-map>
             </div>
             <div class="card__content trip__content">
                 <div class="trip__description">
@@ -11,14 +81,6 @@
                     </span>
                     <span class="trip__description-value">
                         {{trip.car.model}}
-                    </span>
-                </div>
-                <div class="trip__description">
-                    <span class="trip__description-label">
-                        Car license:
-                    </span>
-                    <span class="trip__description-value">
-                        {{trip.car.license}}
                     </span>
                 </div>
                 <div class="trip__description">

@@ -1,13 +1,17 @@
+:host {
+    --card-width: 320px;
+    --card-gutter: 2rem;
+}
+
 .trips {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
 }
 
 .trip {
-    min-width: 320px;
-    margin: 2rem;
+    width: var(--card-width);
+    margin: var(--card-gutter);
     overflow: hidden;
 }
 
@@ -19,7 +23,7 @@
 
 .trip__header {
     width: 100%;
-    padding-bottom: 80%;
+    padding-bottom: 75%;
     position: relative;
 }
 
@@ -59,5 +63,17 @@
 
 .trip__button {
     margin-top: 2rem;
+    width: 100%;
+}
+
+.search {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: var(--card-width);
+    margin: var(--card-gutter);
+}
+
+.search__button {
     width: 100%;
 }
