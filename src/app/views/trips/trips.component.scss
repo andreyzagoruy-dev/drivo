@@ -7,13 +7,12 @@
 
 .trip {
     min-width: 320px;
-    border-radius: 2rem;
     margin: 2rem;
     overflow: hidden;
 }
 
 .trip--active {
-    min-width: 60vw;
+    width: 900px;
     margin: 0;
     padding-right: 55%;
 }
@@ -40,13 +39,6 @@
     border-left: 1px solid var(--border-color);
 }
 
-.trip__content {
-    padding: 1.875rem;
-}
-
-.trip--active .trip__content {
-    padding: 2rem;
-}
 
 .trip__description {
     text-transform: uppercase;
@@ -57,11 +49,6 @@
 
 .trip__description + .trip__description {
     border-top: 1px solid var(--border-color);
-    margin-top: .875rem;
-    padding-top: .875rem;
-}
-
-.trip--active .trip__description + .trip__description {
     margin-top: 1rem;
     padding-top: 1rem;
 }

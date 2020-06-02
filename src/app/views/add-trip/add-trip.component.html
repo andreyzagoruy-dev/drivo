@@ -1,6 +1,6 @@
 <div class="card trip">
     <div class="card__header">
-        <h1>Your trip</h1>
+        <h1 class="card__heading">Your trip</h1>
     </div>
     <div class="card__content">
         <form
@@ -9,6 +9,7 @@
             (ngSubmit)="addTrip()"
         >
             <div class="form__group">
+                <label class="form__label" for="car">Car</label>
                 <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
                     <select
                         class="form__input"
@@ -25,9 +26,10 @@
                 </div>
             </div>
             <div class="form__group">
+                <label class="form__label" for="seatsTotal">Passengers</label>
                 <input
                     class="form__input"
-                    placeholder="Seats number"
+                    placeholder="Enter free seats"
                     type="text"
                     id="seatsTotal"
                     name="seatsTotal"
@@ -36,9 +38,10 @@
                 >
             </div>
             <div class="form__group">
+                <label class="form__label" for="date">Departure time</label>
                 <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
                     <select class="form__input" name="date" id="date" required [(ngModel)]="trip.departureTime">
-                        <option value="null">Departure time</option>
+                        <option value="null">Select time</option>
                         <option *ngFor="let date of dates" [ngValue]="date" >
                             {{date.getHours()}}:00
                         </option>
