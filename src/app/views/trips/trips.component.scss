@@ -66,12 +66,23 @@
     width: 100%;
 }
 
-.search {
+.search, .no-trips {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: var(--card-width);
     margin: var(--card-gutter);
+}
+
+.no-trips__content {
+    padding: 0;
+    padding-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.no-trips__image {
+    width: 100%;
+    transform: scale(1.1);
 }
 
 .search__button {

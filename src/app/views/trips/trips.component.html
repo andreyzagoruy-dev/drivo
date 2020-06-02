@@ -107,6 +107,14 @@
                 </button>
             </div>
         </div>
+        <div class="card no-trips" *ngIf="isNoTrips()" >
+            <div class="card__header">
+                <h2 class="card__heading">No results</h2>
+            </div>
+            <div class="card__content no-trips__content">
+                <img class="no-trips__image" src="/assets/not-found.svg" alt="No trips found">
+            </div>
+        </div>
     </ng-container>
     <ng-container *ngIf="activeTrip">
         <div class="card trip trip--active">
