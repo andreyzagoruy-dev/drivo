@@ -107,7 +107,7 @@ export class TripsComponent implements OnInit, OnDestroy {
   }
 
   public isNoTrips(): boolean {
-    return this.trips.length === 0;
+    return this.trips?.length === 0;
   }
 
   private onActiveTripChange(incomingTrip: Trip): void {
