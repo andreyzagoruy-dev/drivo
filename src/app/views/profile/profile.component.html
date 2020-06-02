@@ -1,6 +1,6 @@
-<div class="card">
+<div class="card card--md">
   <div class="card__header">
-    <h1>Profile</h1>
+    <h1 class="card__heading">Profile</h1>
   </div>
   <div class="card__content">
     <form
@@ -9,25 +9,30 @@
       (ngSubmit)="onSubmit()"
     >
       <div class="form__group">
+        <label class="form__label" for="fullname">Full name</label>
         <input
+          id="fullname"
           class="form__input"
           type="text"
           name="fullname"
-          placeholder="Full name"
+          placeholder="Enter your full name"
           required
           [(ngModel)]="user.fullname"
         >
       </div>
       <div class="form__group">
         <app-places-suggest (addLocation)="setLocation('home', $event)">
+          <label class="form__label" for="home">Home address</label>
           <div
             class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-house"
           >
             <input
               inputListener
+              id="home"
               class="form__input"
-              placeholder="Home address"
+              placeholder="Street, City, Country"
               type="text"
+              name="home"
               [value]="user.homeAddress"
             >
           </div>
@@ -35,14 +40,17 @@
       </div>
       <div class="form__group">
         <app-places-suggest (addLocation)="setLocation('work', $event)">
+          <label class="form__label" for="work">Work address</label>
           <div
             class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-work"
           >
             <input
               inputListener
+              id="work"
               class="form__input"
-              placeholder="Work address"
+              placeholder="Street, City, Country"
               type="text"
+              name="work"
               [value]="user.workAddress"
             >
           </div>

@@ -1,6 +1,6 @@
-<div class="card">
+<div class="card card--md">
   <div class="card__header">
-    <h1>Create account</h1>
+    <h1 class="card__heading">Create account</h1>
   </div>
   <div class="card__content">
     <form
@@ -9,9 +9,10 @@
       (ngSubmit)=onSubmit()
     >
       <div class="form__group">
+        <label class="form__label" for="email">Email</label>
         <input
           class="form__input"
-          placeholder="Email"
+          placeholder="Enter valid email"
           id="email" type="email"
           formControlName="email"
           required
@@ -19,9 +20,10 @@
         >
       </div>
       <div class="form__group">
+        <label class="form__label" for="password">Password</label>
         <input
           class="form__input"
-          placeholder="Password"
+          placeholder="Minimum length: 6"
           id="password"
           type="password"
           formControlName="password"
@@ -30,9 +32,10 @@
         >
       </div>
       <div class="form__group">
+        <label class="form__label" for="confirmPassword">Confirm password</label>
         <input
           class="form__input"
-          placeholder="Confirm password"
+          placeholder="Use the same as above"
           id="confirmPassword"
           type="password"
           formControlName="confirmPassword"
@@ -51,6 +54,6 @@
         </button>
       </div>
     </form>
-    <div class="h-text--center h-mt--sm">Already have an account? <a class="link" routerLink="/login">Login</a></div>
+    <div class="h-text--center h-mt--sm h-text--sm">Already have an account? <a class="link" routerLink="/login">Login</a></div>
   </div>
 </div>

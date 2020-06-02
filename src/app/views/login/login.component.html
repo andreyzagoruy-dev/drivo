@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card__header">
-    <h1>Login</h1>
+    <h1 class="card__heading">Login</h1>
   </div>
   <div class="card__content">
     <form
@@ -9,10 +9,12 @@
       class="form"
     >
       <div class="form__group">
-        <input class="form__input" type="text" placeholder="Email" id="email" [(ngModel)]="email" name="email" required >
+        <label class="form__label" for="email">Email</label>
+        <input class="form__input" type="text" placeholder="Your email" id="email" [(ngModel)]="email" name="email" required >
       </div>
       <div class="form__group">
-        <input class="form__input" type="password" placeholder="Password" id="password" [(ngModel)]="password" name="password" required>
+        <label class="form__label" for="password">Password</label>
+        <input class="form__input" type="password" placeholder="Your password" id="password" [(ngModel)]="password" name="password" required>
       </div>
       <div class="form__group">
         <button
@@ -25,6 +27,6 @@
         </button>
       </div>
     </form>
-    <div class="h-text--center h-mt--sm">Don't have an account? <a class="link" routerLink="/sign-up">Sign up</a></div>
+    <div class="h-text--center h-mt--sm h-text--sm">Don't have an account? <a class="link" routerLink="/sign-up">Sign up</a></div>
   </div>
 </div>
