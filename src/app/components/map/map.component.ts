@@ -27,7 +27,11 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.map && this.renderObjectsOnMap();
+    if (this.map) {
+      this.clearMap();
+      this.renderMap();
+      this.renderObjectsOnMap();
+    }
   }
 
   private initMap(): void {
@@ -42,6 +46,12 @@ export class MapComponent implements OnInit, OnChanges {
     });
   }
 
+  private clearMap(): void {
+    this.map.eachLayer((layer) => {
+      this.map.removeLayer(layer);
+    });
+  }
+
   private renderMap(): void {
     const tiles = tileLayer(`https://2.base.maps.ls.hereapi.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/512/png8?apiKey=${API_KEY}&ppi=250`, {
       maxZoom: 19
@@ -50,7 +60,7 @@ export class MapComponent implements OnInit, OnChanges {
     tiles.addTo(this.map);
   }
 
-  private renderObjectsOnMap() {
+  private renderObjectsOnMap(): void {
     this.renderMarkers();
     this.renderHome();
     this.renderPath();

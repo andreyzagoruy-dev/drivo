@@ -5,6 +5,7 @@ import { StorageService } from '@app/services/storage.service';
 import { Trip } from '@app/models/trip';
 import { Car } from '@app/models/car';
 import { User } from '@app/models/user';
+import { HereMapsPlace, LatLng } from '@models/map';
 
 @Component({
   selector: 'app-add-trip',
@@ -24,6 +25,11 @@ export class AddTripComponent implements OnInit {
     route: this.route.snapshot.data.tripRoute
   };
 
+  public startAddress: string;
+  public startLocation: LatLng;
+  public finishAddress: string;
+  public finishLocation: LatLng;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -32,6 +38,13 @@ export class AddTripComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    const { homeAddress, homeLocation, workAddress, workLocation } = this.user;
+
+    this.startAddress = workAddress;
+    this.startLocation = workLocation;
+    this.finishAddress = homeAddress;
+    this.finishLocation = homeLocation;
+
     this.generateDates();
   }
 
@@ -43,11 +56,25 @@ export class AddTripComponent implements OnInit {
       });
   }
 
+  public setLocation(type: 'start' | 'finish', place: HereMapsPlace): void {
+    const { prettyAddress, position: { lat, lng } } = place;
+    this[`${type}Address`] = prettyAddress;
+    this[`${type}Location`] = [lat, lng];
+    this.calculateTripRoute();
+  }
+
+  private calculateTripRoute() {
+    this.api.getRoute(this.startLocation, this.finishLocation)
+      .subscribe((calculatedRoute) => {
+        this.trip = { ...this.trip, route: calculatedRoute, start: this.startLocation };
+      });
+  }
+
   private generateDates(): void {
     const currentDate = new Date();
     let currentHour = currentDate.getHours();
 
-    while (currentHour !== 24) {
+    while (currentHour !== 23) {
       currentHour += 1;
       currentDate.setHours(currentHour);
       currentDate.setMinutes(0, 0, 0);

@@ -38,6 +38,34 @@
                 >
             </div>
             <div class="form__group">
+                <app-places-suggest (addLocation)="setLocation('start', $event)">
+                    <label class="form__label" for="start">Start</label>
+                    <input
+                        inputListener
+                        id="start"
+                        class="form__input"
+                        placeholder="Street, City, Country"
+                        type="text"
+                        name="start"
+                        [value]="startAddress"
+                    >
+                </app-places-suggest>
+            </div>
+            <div class="form__group">
+                <app-places-suggest (addLocation)="setLocation('finish', $event)">
+                    <label class="form__label" for="finish">Destination</label>
+                    <input
+                        inputListener
+                        id="finish"
+                        class="form__input"
+                        placeholder="Street, City, Country"
+                        type="text"
+                        name="finish"
+                        [value]="finishAddress"
+                    >
+                </app-places-suggest>
+            </div>
+            <div class="form__group">
                 <label class="form__label" for="date">Departure time</label>
                 <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
                     <select class="form__input" name="date" id="date" required [(ngModel)]="trip.departureTime">
