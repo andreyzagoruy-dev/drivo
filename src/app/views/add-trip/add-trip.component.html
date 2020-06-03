@@ -67,15 +67,27 @@
                     >
                 </app-places-suggest>
             </div>
-            <div class="form__group">
-                <label class="form__label" for="date">Departure time</label>
-                <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
-                    <select class="form__input" name="date" id="date" required [(ngModel)]="trip.departureTime">
-                        <option value="null">Select time</option>
-                        <option *ngFor="let date of dates" [ngValue]="date" >
-                            {{date.getHours()}}:00
-                        </option>
-                    </select>
+            <div class="form__group form__group--inline">
+                <div class="form__group">
+                    <label class="form__label" for="hour">Hours</label>
+                    <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
+                        <select class="form__input" name="hour" id="hour" required [(ngModel)]="departureHour" (change)="setDepartureTime()">
+                            <option *ngFor="let hour of departureHourOptions" [value]="hour" >
+                                {{hour}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form__group">
+                    <label class="form__label" for="minutes">Minutes</label>
+                    <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
+                        <select class="form__input" name="minutes" id="minutes" required [(ngModel)]="departureMinutes" (change)="setDepartureTime()">
+                            <option value="0">00</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="form__group">

@@ -15,7 +15,9 @@ import { HereMapsPlace, LatLng } from '@models/map';
 export class AddTripComponent implements OnInit {
   public user: User = this.route.snapshot.data.userProfile;
   public cars: Car[] = this.route.snapshot.data.cars;
-  public dates: Date[] = [];
+  public departureHourOptions: number[] = [];
+  public departureHour: number;
+  public departureMinutes = 0;
   public trip: Trip = {
     driverId: this.user.id,
     departureTime: null,
@@ -45,7 +47,8 @@ export class AddTripComponent implements OnInit {
     this.finishAddress = homeAddress;
     this.finishLocation = homeLocation;
 
-    this.generateDates();
+    this.generateHourOptions();
+    this.setDepartureTime();
   }
 
   public addTrip(): void {
@@ -54,6 +57,13 @@ export class AddTripComponent implements OnInit {
         this.storage.setItem('activeTrip', createdTrip);
         this.router.navigate(['/trips']);
       });
+  }
+
+  public setDepartureTime(): void {
+    const departureTime = new Date();
+
+    departureTime.setHours(this.departureHour, this.departureMinutes, 0, 0);
+    this.trip.departureTime = departureTime;
   }
 
   public setLocation(type: 'start' | 'finish', place: HereMapsPlace): void {
@@ -70,15 +80,16 @@ export class AddTripComponent implements OnInit {
       });
   }
 
-  private generateDates(): void {
+  private generateHourOptions(): void {
     const currentDate = new Date();
     let currentHour = currentDate.getHours();
 
     while (currentHour !== 23) {
       currentHour += 1;
-      currentDate.setHours(currentHour);
-      currentDate.setMinutes(0, 0, 0);
-      this.dates.push(new Date(currentDate));
+      this.departureHourOptions.push(currentHour);
     }
+
+    const [nextHour] = this.departureHourOptions;
+    this.departureHour = nextHour;
   }
 }
