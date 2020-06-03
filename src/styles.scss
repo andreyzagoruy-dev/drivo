@@ -116,6 +116,21 @@ html {
   margin-top: 1.5rem;
 }
 
+.form__group--inline {
+  display: flex;
+  align-items: center;
+}
+
+.form__group--inline .form__group {
+  margin: 0;
+  margin-left: 1rem;
+  flex: 1;
+}
+
+.form__group--inline .form__group:first-of-type {
+  margin: 0;
+}
+
 .form__label {
   display: block;
   text-align: left;

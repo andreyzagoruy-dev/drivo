@@ -1,6 +1,6 @@
 <div class="card trip">
     <div class="card__header">
-        <h1 class="card__heading">Your trip</h1>
+        <h1 class="card__heading">New trip</h1>
     </div>
     <div class="card__content">
         <form
@@ -8,34 +8,36 @@
             class="form"
             (ngSubmit)="addTrip()"
         >
-            <div class="form__group">
-                <label class="form__label" for="car">Car</label>
-                <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
-                    <select
-                        class="form__input"
-                        name="car"
-                        id="car"
-                        required
-                        [(ngModel)]="trip.car"
-                    >
-                        <option value="null">Select car</option>
-                        <option *ngFor="let car of cars" [ngValue]="car">
-                            {{car.model}}({{car.license}})
-                        </option>
-                    </select>
+            <div class="form__group form__group--inline">
+                <div class="form__group">
+                    <label class="form__label" for="car">Car</label>
+                    <div class="form__field form__field--icon form__field--icon-color-secondary form__field--icon-arrow-down">
+                        <select
+                            class="form__input"
+                            name="car"
+                            id="car"
+                            required
+                            [(ngModel)]="trip.car"
+                        >
+                            <option value="null">Select car</option>
+                            <option *ngFor="let car of cars" [ngValue]="car">
+                                {{car.model}}({{car.license}})
+                            </option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form__group">
-                <label class="form__label" for="seatsTotal">Passengers</label>
-                <input
-                    class="form__input"
-                    placeholder="Enter free seats"
-                    type="text"
-                    id="seatsTotal"
-                    name="seatsTotal"
-                    required
-                    [(ngModel)]="trip.seatsTotal"
-                >
+                <div class="form__group">
+                    <label class="form__label" for="seatsTotal">Passengers</label>
+                    <input
+                        class="form__input"
+                        placeholder="Free seats"
+                        type="text"
+                        id="seatsTotal"
+                        name="seatsTotal"
+                        required
+                        [(ngModel)]="trip.seatsTotal"
+                    >
+                </div>
             </div>
             <div class="form__group">
                 <app-places-suggest (addLocation)="setLocation('start', $event)">
