@@ -2,5 +2,5 @@ export const environment = {
   production: true,
   apiBaseUrl: '/api',
   apiMapsUrl: 'https://geocode.search.hereapi.com/v1/geocode?apiKey=',
-  apiMapsKey: 'PlBaCE42NHOrkIaoJA_XyUfT8ea0HIUaLpumgDgADrE'
+  apiMapsKey: '-2ULcl4-S5xx9jyodjEaVNdr2g7oDPnkMG796xnTkoQ'
 };
